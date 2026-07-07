@@ -4,8 +4,8 @@
 
 body{
 
-    background:#5b4337;
-
+    background:
+    #5b4337;
     linear-gradient(
     90deg,
     #4d0d18 0%,
@@ -47,8 +47,9 @@ body{
 
 .book{
 
-    width:230px;
-    height:320px;
+    width:clamp(190px,45vw,230px);
+
+    height:clamp(270px,62vw,320px);
 
     position:relative;
 
@@ -89,7 +90,9 @@ body{
         box-shadow .5s ease;
 }
 
-/* 書脊反光 */
+/* ===========================
+   書脊反光
+=========================== */
 
 .book::before{
 
@@ -103,7 +106,11 @@ body{
     width:6px;
     height:100%;
 
-    background:rgba(255,255,255,.08);
+    background:linear-gradient(
+        90deg,
+        rgba(255,255,255,.12),
+        rgba(255,255,255,.02)
+    );
 }
 
 /* 書頁 */
@@ -120,7 +127,19 @@ body{
     width:8px;
     height:304px;
 
-    background:#efe7d7;
+    background:
+
+    repeating-linear-gradient(
+
+    180deg,
+
+    #efe7d7,
+
+    #efe7d7 3px,
+
+    #e3d9c5 4px
+
+);
 
     border-radius:0 4px 4px 0;
 }
@@ -160,40 +179,6 @@ body{
 
     box-shadow:
     inset 0 0 12px rgba(255,255,255,.04);
-}
-
-.cover-top{
-
-    position:absolute;
-
-    top:48px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    color:#d9b76d;
-
-    font-size:18px;
-
-    opacity:.8;
-}
-
-.cover-bottom{
-
-    position:absolute;
-
-    bottom:48px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    color:#d9b76d;
-
-    font-size:18px;
-
-    opacity:.8;
 }
 
 /* 書名 */
@@ -254,6 +239,28 @@ body{
 }
 
 /* ===========================
+
+   燙金動畫
+
+=========================== */
+
+@keyframes goldShine{
+
+    from{
+
+        background-position:200% 0;
+
+    }
+
+    to{
+
+        background-position:-200% 0;
+
+    }
+
+}
+
+/* ===========================
    咖啡
 =========================== */
 
@@ -309,7 +316,9 @@ body{
 
     background-size:200% 100%;
 
+    background-clip:text;
     -webkit-background-clip:text;
+
     color:transparent;
 
     animation:goldShine .8s ease;
