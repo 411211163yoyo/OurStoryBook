@@ -1,7 +1,7 @@
-const book = document.querySelector(".book");
+const book = document.getElementById("book");
 
-book.addEventListener("click",()=>{
+book.addEventListener("click", function(){
 
-    console.log("Book Open");
+    book.classList.toggle("open");
 
 });
