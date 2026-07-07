@@ -242,7 +242,7 @@ body{
 
     letter-spacing:3px;
 
-    font-family:Georgia, serif;
+    font-family:"Cormorant Garamond", serif;
 
     text-align:center;
 
@@ -271,7 +271,7 @@ body{
 
     letter-spacing:2px;
 
-    font-family:Georgia, serif;
+    font-family:"Cormorant Garamond", serif;
 
     text-transform:uppercase;
 
@@ -405,14 +405,16 @@ body{
 
     color:#5d4b42;
 
-    font-family:Georgia,serif;
+    font-family:"Cormorant Garamond", serif;
 }
 
 .quote{
 
-    font-size:22px;
+    font-size:clamp(18px,4vw,22px);
 
-    line-height:1.6;
+    line-height:1.7;
+
+    font-weight:500;
 }
 
 .small{
@@ -424,4 +426,14 @@ body{
     opacity:.7;
 
     letter-spacing:2px;
+}
+
+/* ===========================
+   封面翻開
+=========================== */
+
+.book.open .cover{
+
+    transform:rotateY(-160deg);
+
 }
