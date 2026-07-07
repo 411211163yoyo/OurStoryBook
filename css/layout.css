@@ -113,7 +113,9 @@ body{
     );
 }
 
-/* 書頁 */
+/* ===========================
+   書頁
+=========================== */
 
 .book::after{
 
@@ -121,27 +123,50 @@ body{
 
     position:absolute;
 
-    right:-8px;
+    right:-10px;
     top:8px;
 
-    width:8px;
+    width:10px;
     height:304px;
 
     background:
-
     repeating-linear-gradient(
-
-    180deg,
-
-    #efe7d7,
-
-    #efe7d7 3px,
-
-    #e3d9c5 4px
-
-);
+        180deg,
+        #f5efe3 0px,
+        #f5efe3 3px,
+        #e6dcc8 4px
+    );
 
     border-radius:0 4px 4px 0;
+
+    box-shadow:
+        inset 1px 0 rgba(255,255,255,.4);
+}
+
+/* ===========================
+   書本底部陰影
+=========================== */
+
+.book-shadow{
+
+    position:absolute;
+
+    width:240px;
+    height:20px;
+
+    background:rgba(0,0,0,.18);
+
+    border-radius:50%;
+
+    filter:blur(8px);
+
+    bottom:-18px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:-1;
 }
 
 /* 滑鼠移過去 */
