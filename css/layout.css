@@ -4,25 +4,8 @@
 
 body{
 
-    background:
-    #5b4337;
-    linear-gradient(
-    90deg,
-    #4d0d18 0%,
-    #661223 18%,
-    #7d1930 45%,
-    #8b2036 55%,
-    #661223 82%,
-    #4d0d18 100%
-    ),
+    background:#5b4337;
 
-    repeating-linear-gradient(
-    45deg,
-    rgba(255,255,255,.03) 0px,
-    rgba(255,255,255,.03) 2px,
-    transparent 2px,
-    transparent 6px
-    );
 }
 
 /* ===========================
@@ -48,10 +31,13 @@ body{
 .book{
 
     width:clamp(190px,45vw,230px);
-
     height:clamp(270px,62vw,320px);
 
     position:relative;
+
+    perspective:2000px;
+
+    transform-style:preserve-3d;
 
     display:flex;
     justify-content:center;
@@ -63,16 +49,6 @@ body{
 
     border-radius:10px;
 
-    background:
-    linear-gradient(
-        90deg,
-        #4d0d18 0%,
-        #661223 18%,
-        #7d1930 45%,
-        #8b2036 55%,
-        #661223 82%,
-        #4d0d18 100%
-    ),
     repeating-linear-gradient(
         45deg,
         rgba(255,255,255,.03) 0px,
@@ -204,6 +180,45 @@ body{
 
     box-shadow:
     inset 0 0 12px rgba(255,255,255,.04);
+}
+
+/* ===========================
+   封面
+=========================== */
+
+.cover{
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:10px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #4d0d18 0%,
+        #661223 18%,
+        #7d1930 45%,
+        #8b2036 55%,
+        #661223 82%,
+        #4d0d18 100%
+    ),
+    repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,.03) 0px,
+        rgba(255,255,255,.03) 2px,
+        transparent 2px,
+        transparent 6px
+    );
+
+    transform-origin:left;
+
+    transition:transform 1.2s ease;
+
+    backface-visibility:hidden;
+
+    z-index:10;
 }
 
 /* 書名 */
@@ -357,4 +372,56 @@ body{
     color:transparent;
 
     animation:goldShine .8s ease;
+}
+
+/* ===========================
+   第一頁
+=========================== */
+
+.first-page{
+
+    position:absolute;
+
+    inset:0;
+
+    background:#f7f2e8;
+
+    border-radius:10px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:30px;
+
+    z-index:-1;
+}
+
+.page-content{
+
+    color:#5d4b42;
+
+    font-family:Georgia,serif;
+}
+
+.quote{
+
+    font-size:22px;
+
+    line-height:1.6;
+}
+
+.small{
+
+    margin-top:30px;
+
+    font-size:12px;
+
+    opacity:.7;
+
+    letter-spacing:2px;
 }
