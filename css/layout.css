@@ -1,0 +1,316 @@
+/* ===========================
+   整體背景（桌面）
+=========================== */
+
+body{
+
+    background:#5b4337;
+
+    linear-gradient(
+    90deg,
+    #4d0d18 0%,
+    #661223 18%,
+    #7d1930 45%,
+    #8b2036 55%,
+    #661223 82%,
+    #4d0d18 100%
+    ),
+
+    repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,.03) 0px,
+    rgba(255,255,255,.03) 2px,
+    transparent 2px,
+    transparent 6px
+    );
+}
+
+/* ===========================
+   桌面
+=========================== */
+
+.desk{
+
+    width:100vw;
+    height:100vh;
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* ===========================
+   故事書
+=========================== */
+
+.book{
+
+    width:230px;
+    height:320px;
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    border-radius:10px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #4d0d18 0%,
+        #661223 18%,
+        #7d1930 45%,
+        #8b2036 55%,
+        #661223 82%,
+        #4d0d18 100%
+    ),
+    repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,.03) 0px,
+        rgba(255,255,255,.03) 2px,
+        transparent 2px,
+        transparent 6px
+    );
+
+    box-shadow:
+        -8px 0px 0px #3f0c15,
+        0 20px 45px rgba(0,0,0,.35);
+
+    transition:
+        transform .5s ease,
+        box-shadow .5s ease;
+}
+
+/* 書脊反光 */
+
+.book::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:10px;
+    top:0;
+
+    width:6px;
+    height:100%;
+
+    background:rgba(255,255,255,.08);
+}
+
+/* 書頁 */
+
+.book::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:-8px;
+    top:8px;
+
+    width:8px;
+    height:304px;
+
+    background:#efe7d7;
+
+    border-radius:0 4px 4px 0;
+}
+
+/* 滑鼠移過去 */
+
+.book:hover{
+
+    transform:
+        translateY(-4px)
+        rotate(-1deg);
+
+    box-shadow:
+        -8px 0px 0px #3f0c15,
+        0 28px 55px rgba(0,0,0,.45);
+}
+
+
+/* ===========================
+   封面金框
+=========================== */
+
+.cover-border{
+
+    position:absolute;
+
+    top:16px;
+    left:16px;
+    right:16px;
+    bottom:16px;
+
+    border:1px solid rgba(215,190,120,.7);
+
+    border-radius:6px;
+
+    pointer-events:none;
+
+    box-shadow:
+    inset 0 0 12px rgba(255,255,255,.04);
+}
+
+.cover-top{
+
+    position:absolute;
+
+    top:48px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    color:#d9b76d;
+
+    font-size:18px;
+
+    opacity:.8;
+}
+
+.cover-bottom{
+
+    position:absolute;
+
+    bottom:48px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    color:#d9b76d;
+
+    font-size:18px;
+
+    opacity:.8;
+}
+
+/* 書名 */
+
+.book h1{
+
+    position:absolute;
+
+    top:42%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    z-index:5;
+
+    color:#e4cb8b;
+
+    font-size:26px;
+
+    font-weight:400;
+
+    letter-spacing:3px;
+
+    font-family:Georgia, serif;
+
+    text-align:center;
+
+    white-space:nowrap;
+
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.35),
+        0 0 8px rgba(255,210,100,.15),
+        0 2px 4px rgba(0,0,0,.25);
+
+    user-select:none;
+}
+
+.since{
+
+    position:absolute;
+
+    top:58%;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    color:rgba(228,203,139,.75);
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    font-family:Georgia, serif;
+
+    text-transform:uppercase;
+
+    user-select:none;
+}
+
+/* ===========================
+   咖啡
+=========================== */
+
+.coffee{
+
+    width:70px;
+    height:70px;
+
+    background:#b9855d;
+
+    border-radius:50%;
+
+    position:absolute;
+
+    left:18%;
+    bottom:18%;
+
+    box-shadow:
+        0 10px 20px rgba(0,0,0,.25);
+}
+
+/* ===========================
+   黑膠
+=========================== */
+
+.record-player{
+
+    width:120px;
+    height:120px;
+
+    background:#222;
+
+    border-radius:50%;
+
+    position:absolute;
+
+    right:15%;
+    top:12%;
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.35);
+}
+
+
+.book:hover h1{
+
+    background:linear-gradient(
+        90deg,
+        #d8b36b 0%,
+        #fff6c9 50%,
+        #d8b36b 100%
+    );
+
+    background-size:200% 100%;
+
+    -webkit-background-clip:text;
+    color:transparent;
+
+    animation:goldShine .8s ease;
+}
