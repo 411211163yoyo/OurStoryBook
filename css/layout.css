@@ -4,7 +4,13 @@
 
 body{
 
-    background:#5b4337;
+    background:
+
+    linear-gradient(
+        180deg,
+        #6b4f42 0%,
+        #5b4337 100%
+    );
 
 }
 
@@ -22,6 +28,8 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
+
+    overflow:hidden;
 }
 
 /* ===========================
@@ -48,14 +56,6 @@ body{
     overflow:hidden;
 
     border-radius:10px;
-
-    repeating-linear-gradient(
-        45deg,
-        rgba(255,255,255,.03) 0px,
-        rgba(255,255,255,.03) 2px,
-        transparent 2px,
-        transparent 6px
-    );
 
     box-shadow:
         -8px 0px 0px #3f0c15,
@@ -103,7 +103,7 @@ body{
     top:8px;
 
     width:10px;
-    height:304px;
+    height:calc(100% - 16px);
 
     background:
     repeating-linear-gradient(
@@ -127,7 +127,7 @@ body{
 
     position:absolute;
 
-    width:240px;
+    width:105%;
     height:20px;
 
     background:rgba(0,0,0,.18);
@@ -350,7 +350,7 @@ body{
 
 .book.open{
 
-    transform:scale(1.6);
+    transform:scale(1.35);
 
     z-index:100;
 }
@@ -375,18 +375,34 @@ body{
 }
 
 /* ===========================
-   第一頁
+   Opening Page
 =========================== */
 
-.first-page{
+.opening-page{
 
     position:absolute;
 
     inset:0;
 
-    background:#f7f2e8;
+    background:
+    radial-gradient(
+        rgba(0,0,0,.02) 1px,
+        transparent 1px
+    ),
+    linear-gradient(
+        180deg,
+        #f8f3e7 0%,
+        #f2ebdc 100%
+    );
+
+    background-size:
+    18px 18px,
+    100% 100%;
 
     border-radius:10px;
+
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,.04);
 
     display:flex;
 
@@ -394,38 +410,49 @@ body{
 
     align-items:center;
 
-    text-align:center;
-
-    padding:30px;
+    padding:40px;
 
     z-index:-1;
 }
 
-.page-content{
+.opening-content{
 
-    color:#5d4b42;
+    width:100%;
+
+    text-align:center;
+}
+
+.opening-title{
 
     font-family:"Cormorant Garamond", serif;
+
+    font-size:clamp(28px,5vw,38px);
+
+    color:#6f5848;
+
+    margin-bottom:50px;
 }
 
-.quote{
+.opening-text{
 
-    font-size:clamp(18px,4vw,22px);
+    font-family:"Cormorant Garamond", serif;
 
-    line-height:1.7;
+    font-size:clamp(18px,3vw,24px);
 
-    font-weight:500;
+    line-height:1.9;
+
+    color:#6b5b55;
 }
 
-.small{
+.opening-year{
 
-    margin-top:30px;
+    margin-top:70px;
 
-    font-size:12px;
+    font-size:14px;
 
-    opacity:.7;
+    letter-spacing:4px;
 
-    letter-spacing:2px;
+    color:#9b8a74;
 }
 
 /* ===========================
