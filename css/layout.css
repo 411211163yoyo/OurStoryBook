@@ -459,7 +459,7 @@ body{
    封面翻開
 =========================== */
 
-.book.open .cover{
+.book.opened .cover{
 
     transform:rotateY(-160deg);
 

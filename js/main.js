@@ -1,7 +1,13 @@
 const book = document.getElementById("book");
 
-book.addEventListener("click", function(){
+book.addEventListener("click", () => {
 
-    book.classList.toggle("open");
+    book.classList.add("open");
+
+    setTimeout(() => {
+
+        book.classList.add("opened");
+
+    }, 400);
 
 });
