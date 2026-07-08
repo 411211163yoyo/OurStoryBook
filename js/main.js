@@ -1,13 +1,35 @@
 const book = document.getElementById("book");
 
+let isOpen = false;
+
 book.addEventListener("click", () => {
 
-    book.classList.add("open");
+    if(!isOpen){
 
-    setTimeout(() => {
+        book.classList.add("open");
 
-        book.classList.add("opened");
+        setTimeout(() => {
 
-    }, 400);
+            book.classList.add("opened");
+
+        },400);
+
+        isOpen = true;
+
+    }
+
+    else{
+
+        book.classList.remove("opened");
+
+        setTimeout(() => {
+
+            book.classList.remove("open");
+
+        },400);
+
+        isOpen = false;
+
+    }
 
 });

@@ -464,3 +464,47 @@ body{
     transform:rotateY(-160deg);
 
 }
+
+/* ===========================
+   Pages Container
+=========================== */
+
+.pages{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:1;
+
+}
+
+/* ===========================
+   每一頁
+=========================== */
+
+.page{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    backface-visibility:hidden;
+
+}
+
+.chapter-page{
+
+    background:#f8f3e7;
+
+    opacity:0;
+
+}
