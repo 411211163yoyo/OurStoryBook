@@ -8,6 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/global.css">
@@ -16,15 +17,18 @@
 
 <body>
 
-    <div class="desk">
+<div class="desk">
 
-        <div class="record-player"></div>
+    <!-- 黑膠 -->
+    <div class="record-player"></div>
 
-        <div class="coffee"></div>
+    <!-- 咖啡 -->
+    <div class="coffee"></div>
 
-        <div class="book" id="book">
+    <!-- 書 -->
+    <div class="book" id="book">
 
-        <!-- 陰影 -->
+        <!-- 書本陰影 -->
         <div class="book-shadow"></div>
 
         <!-- 封面 -->
@@ -38,12 +42,14 @@
 
         </div>
 
-        <!-- Opening Page -->
-
+        <!-- 所有書頁 -->
         <div class="pages">
 
-            <!-- Page 1 -->
-            <div class="page opening-page">
+            <!-- ==========================
+                 Page 1
+            =========================== -->
+
+            <section class="page page-1">
 
                 <div class="opening-content">
 
@@ -63,10 +69,16 @@
 
                 </div>
 
-            </div>
+                <!-- 翻頁折角 -->
+                <div class="page-corner"></div>
 
-            <!-- Page 2 -->
-            <div class="page chapter-page">
+            </section>
+
+            <!-- ==========================
+                 Page 2
+            =========================== -->
+
+            <section class="page page-2">
 
                 <div class="chapter-content">
 
@@ -80,7 +92,7 @@
 
                 </div>
 
-            </div>
+            </section>
 
         </div>
 
@@ -88,8 +100,7 @@
 
 </div>
 
-    <script src="js/main.js"></script>
+<script src="js/main.js"></script>
 
 </body>
-
 </html>
