@@ -1,5 +1,9 @@
 const book = document.getElementById("book");
 
+const firstPage = document.querySelector(".page-1");
+
+const pageCorner = document.querySelector(".page-corner");
+
 let isOpen = false;
 
 function openBook(){
@@ -41,5 +45,13 @@ book.addEventListener("click", () => {
         openBook();
 
     }
+
+});
+
+pageCorner.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
+
+    firstPage.classList.add("flipped");
 
 });

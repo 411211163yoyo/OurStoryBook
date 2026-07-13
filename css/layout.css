@@ -529,6 +529,57 @@ body{
 
     display:block;
 }
+
+/* ===========================
+   翻頁折角
+=========================== */
+
+.page-corner{
+
+    position:absolute;
+
+    right:0;
+
+    bottom:0;
+
+    width:42px;
+
+    height:42px;
+
+    cursor:pointer;
+
+}
+
+.page-corner::before{
+
+    content:"";
+
+    position:absolute;
+
+    right:0;
+
+    bottom:0;
+
+    width:42px;
+
+    height:42px;
+
+    background:linear-gradient(
+        135deg,
+        transparent 50%,
+        #e8dcc6 50%
+    );
+
+    box-shadow:
+        -2px -2px 6px rgba(0,0,0,.08);
+}
+
+.page-corner:hover{
+
+    transform:scale(1.08);
+
+}
+
 /* ===========================
    頁面堆疊
 =========================== */
@@ -631,5 +682,13 @@ body{
 .page.flipped{
 
     transform:rotateY(-180deg);
+
+}
+
+.page.flipped{
+
+    transform:rotateY(-180deg);
+
+    z-index:0;
 
 }
