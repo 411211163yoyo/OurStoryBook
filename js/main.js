@@ -1,57 +1,89 @@
 const book = document.getElementById("book");
 
 const firstPage = document.querySelector(".page-1");
+const secondPage = document.querySelector(".page-2");
 
 const pageCorner = document.querySelector(".page-corner");
 
-let isOpen = false;
+let isBookOpen = false;
+let currentPage = 1;
+
+
+// ======================
+// 打開 / 關閉書
+// ======================
+
+book.addEventListener("click", () => {
+
+    if (!isBookOpen) {
+
+        openBook();
+
+    } else {
+
+        closeBook();
+
+    }
+
+});
+
+
+// ======================
+// 打開
+// ======================
 
 function openBook(){
 
     book.classList.add("open");
 
-    setTimeout(() => {
+    setTimeout(()=>{
 
         book.classList.add("opened");
 
     },400);
 
-    isOpen = true;
+    isBookOpen = true;
 
 }
+
+
+// ======================
+// 關閉
+// ======================
 
 function closeBook(){
 
-    book.classList.remove("opened");
+    firstPage.classList.remove("flipped");
 
-    setTimeout(() => {
+    setTimeout(()=>{
+
+        book.classList.remove("opened");
+
+    },200);
+
+    setTimeout(()=>{
 
         book.classList.remove("open");
 
-    },400);
+    },700);
 
-    isOpen = false;
+    currentPage = 1;
+
+    isBookOpen = false;
 
 }
 
-book.addEventListener("click", () => {
 
-    if(isOpen){
-
-        closeBook();
-
-    }else{
-
-        openBook();
-
-    }
-
-});
+// ======================
+// 第一頁翻頁
+// ======================
 
 pageCorner.addEventListener("click",(e)=>{
 
     e.stopPropagation();
 
     firstPage.classList.add("flipped");
+
+    currentPage = 2;
 
 });
