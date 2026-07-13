@@ -357,10 +357,8 @@ body{
 .book.open{
 
     transform:
-
-    scale(1.35)
-
-    translateY(-10px);
+        translateY(-10px)
+        scale(1.35);
 
 }
 
@@ -484,6 +482,8 @@ body{
 
     inset:0;
 
+    overflow:hidden;
+
     z-index:1;
 
 }
@@ -508,18 +508,13 @@ body{
 
     backface-visibility:hidden;
 
+    transform-origin:left center;
+
+    transition:
+        transform 1s cubic-bezier(.65,.02,.2,1),
+        opacity .5s ease;
 }
 
-.chapter-page{
-
-    background:#f8f3e7;
-
-    opacity:0;
-
-    pointer-events:none;
-
-    transition:opacity .6s ease;
-}
 
 /* ===========================
    Utility
@@ -533,4 +528,108 @@ body{
 .visible{
 
     display:block;
+}
+/* ===========================
+   頁面堆疊
+=========================== */
+
+.page-1{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        radial-gradient(
+            rgba(0,0,0,.02) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            180deg,
+            #f8f3e7,
+            #f2ebdc
+        );
+
+    background-size:
+        18px 18px,
+        100% 100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+    border-radius:10px;
+
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,.04);
+
+    z-index:9;
+
+}
+
+.page-2{
+
+    z-index:8;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8f3e7,
+            #f1e9d8
+        );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.chapter-content{
+
+    width:100%;
+
+    text-align:center;
+
+}
+
+.chapter-date{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:14px;
+
+    letter-spacing:3px;
+
+    color:#a08c72;
+
+    margin-bottom:22px;
+
+}
+
+.chapter-title{
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:34px;
+
+    font-weight:500;
+
+    color:#675448;
+
+}
+
+/* ===========================
+   翻頁狀態
+=========================== */
+
+.page.flipped{
+
+    transform:rotateY(-180deg);
+
 }
