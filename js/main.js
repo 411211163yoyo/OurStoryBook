@@ -1,7 +1,6 @@
 // =====================================================
 // 故事內容
-// 之後想加頁，只要在這個陣列裡繼續新增物件就好，
-// 不用去改任何翻頁邏輯或 CSS 的 z-index
+// 之後想加頁，只要在這個陣列裡繼續新增物件就好
 // =====================================================
 
 const storyPages = [
@@ -14,30 +13,23 @@ const storyPages = [
     },
 
     {
+        id: "beginning",
+        type: "chapter",
+        date: "March 18, 2026",
+        title: "The Beginning",
+        bookmark: "Beginning",
+        image: "",
+        music: "",
+        text: "..."
+    }
 
-    id:"beginning",
-
-    type:"chapter",
-
-    date:"March 18, 2026",
-
-    title:"The Beginning",
-
-    bookmark:"Beginning",
-
-    image:"",
-
-    music:"",
-
-    text:"..."
-
-}
-
-    // 範例：之後要加第三頁，複製貼上這個格式就好
+    // 之後要加頁，複製這個格式貼上就好：
     // ,{
+    //     id: "...",
     //     type: "chapter",
     //     date: "月 日, 2026",
     //     title: "章節標題",
+    //     bookmark: "書籤上顯示的字",
     //     text: "章節內文……"
     // }
 
@@ -50,6 +42,7 @@ const storyPages = [
 
 const book = document.getElementById("book");
 const pagesContainer = document.querySelector(".pages");
+const bookmarksContainer = document.getElementById("bookmarks");
 
 let currentPage = 0;
 let isBookOpen = false;
@@ -61,13 +54,15 @@ let isBookOpen = false;
 
 function renderPages(){
 
+    // 清空，避免跟 HTML 裡殘留的內容疊在一起
+    pagesContainer.innerHTML = "";
+
     const fragment = document.createDocumentFragment();
 
     storyPages.forEach((page, index) => {
 
         const section = document.createElement("section");
         section.className = "page";
-        // 越前面的頁 z-index 越高，疊在最上面
         section.style.zIndex = storyPages.length - index;
 
         const front = document.createElement("div");
@@ -107,17 +102,52 @@ function renderPages(){
 
         section.appendChild(front);
         section.appendChild(back);
-        pagesContainer.appendChild(section);
+        fragment.appendChild(section);
+
+    });
+
+    pagesContainer.appendChild(fragment);
+
+}
+
+function getPageElements(){
+    return document.querySelectorAll(".page");
+}
+
+
+// =====================================================
+// 書籤導覽（依 storyPages 裡的 bookmark 欄位產生）
+// =====================================================
+
+function renderBookmarks(){
+
+    if(!bookmarksContainer) return;
+
+    bookmarksContainer.innerHTML = "";
+
+    storyPages.forEach((page, index) => {
+
+        if(page.type !== "chapter") return;
+
+        const btn = document.createElement("button");
+        btn.className = "bookmark";
+        btn.textContent = page.bookmark || page.title;
+        btn.dataset.page = index;
+
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if(!isBookOpen) openBook();
+            goToPage(index);
+        });
+
+        bookmarksContainer.appendChild(btn);
 
     });
 
 }
 
 renderPages();
-
-function getPageElements(){
-    return document.querySelectorAll(".page");
-}
+renderBookmarks();
 
 
 // =====================================================
@@ -126,12 +156,16 @@ function getPageElements(){
 
 book.addEventListener("click", (e) => {
 
-    // 折角、頁面內容的點擊不觸發開闔書
     if(e.target.closest(".page-corner")) return;
+    if(e.target.closest(".bookmark")) return;
+
+    // 已翻開那頁的背面，交給下面 pagesContainer 的監聽器處理「往回翻一頁」
+    if(e.target.closest(".page.flipped")) return;
 
     if(!isBookOpen){
         openBook();
-    }else if(currentPage === 0){
+    }else{
+        // 不管翻到第幾頁，點書本都直接關閉並重置回封面
         closeBook();
     }
 
@@ -153,14 +187,10 @@ function closeBook(){
 
     const pages = [...getPageElements()].reverse();
 
-    pages.forEach((page,index)=>{
-
-        setTimeout(()=>{
-
+    pages.forEach((page, index) => {
+        setTimeout(() => {
             page.classList.remove("flipped");
-
-        },index*180);
-
+        }, index * 180);
     });
 
     setTimeout(() => {
@@ -178,13 +208,11 @@ function closeBook(){
 
 
 // =====================================================
-// 翻頁（事件委派：因為頁面是動態產生的，
-// 不能在建立當下直接綁 addEventListener）
+// 翻頁（事件委派，因為頁面是動態產生的）
 // =====================================================
 
 pagesContainer.addEventListener("click", (e) => {
 
-    // 點折角 -> 往下一頁
     if(e.target.classList.contains("page-corner")){
 
         e.stopPropagation();
@@ -200,7 +228,6 @@ pagesContainer.addEventListener("click", (e) => {
 
     }
 
-    // 點已經翻開的那一頁背面 -> 往回翻一頁
     const flippedPage = e.target.closest(".page.flipped");
 
     if(flippedPage && currentPage > 0){
@@ -214,6 +241,11 @@ pagesContainer.addEventListener("click", (e) => {
 
 });
 
+
+// =====================================================
+// 直接跳到指定頁（書籤點擊會用到）
+// =====================================================
+
 function goToPage(target){
 
     const pages = getPageElements();
@@ -223,49 +255,17 @@ function goToPage(target){
     if(target > currentPage){
 
         while(currentPage < target){
-
             pages[currentPage].classList.add("flipped");
-
             currentPage++;
-
         }
 
-    }
-
-    else{
+    }else{
 
         while(currentPage > target){
-
             currentPage--;
-
             pages[currentPage].classList.remove("flipped");
-
         }
 
     }
-
-}
-
-storyPages.forEach((page,index)=>{
-
-    if(page.type==="chapter"){
-
-        const bookmark=document.createElement("button");
-
-        bookmark.className="bookmark";
-
-        bookmark.textContent=page.bookmark;
-
-        bookmark.dataset.page=index;
-
-        bookmarks.appendChild(bookmark);
-
-    }
-
-});
-
-bookmark.onclick=()=>{
-
-    goToPage(index);
 
 }

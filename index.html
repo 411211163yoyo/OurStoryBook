@@ -23,7 +23,10 @@
     <div class="record-player"></div>
 
     <!-- 咖啡 -->
-    <div class="coffee"></div>
+    <div class="coffee">
+        <span class="steam s1"></span>
+        <span class="steam s2"></span>
+    </div>
 
     <!-- 書 -->
     <div class="book" id="book">
@@ -31,77 +34,18 @@
         <!-- 書本陰影 -->
         <div class="book-shadow"></div>
 
-        <!-- ⭐封底 -->
+        <!-- 封底 -->
         <div class="back-cover"></div>
 
-        <!-- 所有書頁 -->
-        <div class="pages">
+        <!-- 書籤導覽（依 main.js 的 storyPages 自動產生按鈕） -->
+        <div class="bookmarks" id="bookmarks"></div>
 
-            <!-- ======================= -->
-            <!-- Page 1 -->
-            <!-- ======================= -->
+        <!-- 所有書頁：由 main.js 依 storyPages 陣列動態產生，
+             這裡務必保持空白，不要再手刻 page-1 / page-2，
+             不然會跟 JS 產生的頁面疊在一起 -->
+        <div class="pages"></div>
 
-            <section class="page page-1">
-
-                <div class="page-front">
-
-                    <div class="opening-content">
-
-                        <p class="opening-title">
-                            For Harrods
-                        </p>
-
-                        <p class="opening-text">
-                            Thank you for every ordinary day
-                            that quietly became
-                            something unforgettable.
-                        </p>
-
-                        <p class="opening-year">
-                            Since 2026
-                        </p>
-
-                    </div>
-
-                    <div class="page-corner"></div>
-
-                </div>
-
-                <div class="page-back"></div>
-
-            </section>
-
-            <!-- ======================= -->
-            <!-- Page 2 -->
-            <!-- ======================= -->
-
-            <section class="page page-2">
-
-                <div class="page-front">
-
-                    <div class="chapter-content">
-
-                        <p class="chapter-date">
-                            March 18, 2026
-                        </p>
-
-                        <h2 class="chapter-title">
-                            The Beginning
-                        </h2>
-
-                    </div>
-
-                    <div class="page-corner"></div>
-
-                </div>
-
-                <div class="page-back"></div>
-
-            </section>
-
-        </div>
-
-        <!-- ⭐封面一定放最後 -->
+        <!-- 封面一定放最後 -->
         <div class="cover">
 
             <div class="cover-border"></div>
