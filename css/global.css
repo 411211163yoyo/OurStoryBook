@@ -14,3 +14,11 @@ body{
     font-family:"Noto Serif TC", serif;
     overflow:hidden;
 }
+
+button{
+    font:inherit;
+}
+
+.modal-open{
+    overflow:hidden;
+}

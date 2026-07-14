@@ -1,0 +1,48 @@
+@keyframes goldShine{
+    from{
+        background-position:200% 0;
+    }
+
+    to{
+        background-position:-200% 0;
+    }
+}
+
+@keyframes steamRise{
+    0%{
+        opacity:0;
+        transform:translateY(0) scale(.7);
+    }
+
+    30%{
+        opacity:.55;
+    }
+
+    100%{
+        opacity:0;
+        transform:translateY(-32px) scale(1.35);
+    }
+}
+
+@keyframes recordSpin{
+    from{
+        rotate:0deg;
+    }
+
+    to{
+        rotate:360deg;
+    }
+}
+
+@keyframes recordLightSweep{
+    0%,
+    100%{
+        opacity:.72;
+        transform:rotate(0deg);
+    }
+
+    50%{
+        opacity:1;
+        transform:rotate(18deg);
+    }
+}

@@ -35,6 +35,36 @@ const storyPages = [
 
 ];
 
+function renderPageContent(page, face = "front"){
+
+    if(!page){
+        return `
+            <div class="page-note">
+                <p>More pages soon</p>
+            </div>
+        `;
+    }
+
+    if(page.type === "opening"){
+        return `
+            <div class="opening-content ${face === "back" ? "page-back-preview" : ""}">
+                <p class="opening-title">${page.title}</p>
+                <p class="opening-text">${page.text}</p>
+                <p class="opening-year">${page.year}</p>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="chapter-content ${face === "back" ? "page-back-preview" : ""}">
+            <p class="chapter-date">${page.date}</p>
+            <h2 class="chapter-title">${page.title}</h2>
+            <p class="chapter-text">${page.text || ""}</p>
+        </div>
+    `;
+
+}
+
 
 // =====================================================
 // DOM 參照
@@ -44,8 +74,7 @@ const book = document.getElementById("book");
 const pagesContainer = document.querySelector(".pages");
 const bookmarksContainer = document.getElementById("bookmarks");
 
-let currentPage = 0;
-let isBookOpen = false;
+let pageTurn;
 
 
 // =====================================================
@@ -68,27 +97,7 @@ function renderPages(){
         const front = document.createElement("div");
         front.className = "page-front";
 
-        if(page.type === "opening"){
-
-            front.innerHTML = `
-                <div class="opening-content">
-                    <p class="opening-title">${page.title}</p>
-                    <p class="opening-text">${page.text}</p>
-                    <p class="opening-year">${page.year}</p>
-                </div>
-            `;
-
-        }else{
-
-            front.innerHTML = `
-                <div class="chapter-content">
-                    <p class="chapter-date">${page.date}</p>
-                    <h2 class="chapter-title">${page.title}</h2>
-                    <p class="chapter-text">${page.text || ""}</p>
-                </div>
-            `;
-
-        }
+        front.innerHTML = renderPageContent(page);
 
         // 除了最後一頁，其餘每頁都自動加上翻頁折角
         if(index < storyPages.length - 1){
@@ -99,6 +108,7 @@ function renderPages(){
 
         const back = document.createElement("div");
         back.className = "page-back";
+        back.innerHTML = renderPageContent(storyPages[index + 1], "back");
 
         section.appendChild(front);
         section.appendChild(back);
@@ -108,10 +118,6 @@ function renderPages(){
 
     pagesContainer.appendChild(fragment);
 
-}
-
-function getPageElements(){
-    return document.querySelectorAll(".page");
 }
 
 
@@ -136,8 +142,8 @@ function renderBookmarks(){
 
         btn.addEventListener("click", (e) => {
             e.stopPropagation();
-            if(!isBookOpen) openBook();
-            goToPage(index);
+            if(!pageTurn.isBookOpen()) pageTurn.openBook();
+            pageTurn.goToPage(index);
         });
 
         bookmarksContainer.appendChild(btn);
@@ -146,126 +152,16 @@ function renderBookmarks(){
 
 }
 
+
+// =====================================================
+// 初始化
+// =====================================================
+
 renderPages();
+
+pageTurn = initPageTurn({
+    book,
+    pagesContainer
+});
+
 renderBookmarks();
-
-
-// =====================================================
-// 打開 / 關閉書
-// =====================================================
-
-book.addEventListener("click", (e) => {
-
-    if(e.target.closest(".page-corner")) return;
-    if(e.target.closest(".bookmark")) return;
-
-    // 已翻開那頁的背面，交給下面 pagesContainer 的監聽器處理「往回翻一頁」
-    if(e.target.closest(".page.flipped")) return;
-
-    if(!isBookOpen){
-        openBook();
-    }else{
-        // 不管翻到第幾頁，點書本都直接關閉並重置回封面
-        closeBook();
-    }
-
-});
-
-function openBook(){
-
-    book.classList.add("open");
-
-    setTimeout(() => {
-        book.classList.add("opened");
-    }, 400);
-
-    isBookOpen = true;
-
-}
-
-function closeBook(){
-
-    const pages = [...getPageElements()].reverse();
-
-    pages.forEach((page, index) => {
-        setTimeout(() => {
-            page.classList.remove("flipped");
-        }, index * 180);
-    });
-
-    setTimeout(() => {
-        book.classList.remove("opened");
-    }, 200);
-
-    setTimeout(() => {
-        book.classList.remove("open");
-    }, 700);
-
-    currentPage = 0;
-    isBookOpen = false;
-
-}
-
-
-// =====================================================
-// 翻頁（事件委派，因為頁面是動態產生的）
-// =====================================================
-
-pagesContainer.addEventListener("click", (e) => {
-
-    if(e.target.classList.contains("page-corner")){
-
-        e.stopPropagation();
-
-        const pages = getPageElements();
-
-        if(currentPage < pages.length - 1){
-            pages[currentPage].classList.add("flipped");
-            currentPage++;
-        }
-
-        return;
-
-    }
-
-    const flippedPage = e.target.closest(".page.flipped");
-
-    if(flippedPage && currentPage > 0){
-
-        e.stopPropagation();
-
-        currentPage--;
-        getPageElements()[currentPage].classList.remove("flipped");
-
-    }
-
-});
-
-
-// =====================================================
-// 直接跳到指定頁（書籤點擊會用到）
-// =====================================================
-
-function goToPage(target){
-
-    const pages = getPageElements();
-
-    if(target === currentPage) return;
-
-    if(target > currentPage){
-
-        while(currentPage < target){
-            pages[currentPage].classList.add("flipped");
-            currentPage++;
-        }
-
-    }else{
-
-        while(currentPage > target){
-            currentPage--;
-            pages[currentPage].classList.remove("flipped");
-        }
-
-    }
-
-}

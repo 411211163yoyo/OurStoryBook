@@ -9,10 +9,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+TC:wght@400;500;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/book.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/animation.css">
 </head>
 
 <body>
@@ -20,13 +23,25 @@
 <div class="desk">
 
     <!-- 黑膠 -->
-    <div class="record-player"></div>
+    <button class="record-player" id="recordPlayer" type="button" aria-label="打開黑膠音樂">
+        <span class="record-platter">
+            <span class="record-disc"></span>
+            <span class="record-label"></span>
+        </span>
+        <span class="record-tonearm"></span>
+        <span class="record-base-light"></span>
+    </button>
 
     <!-- 咖啡 -->
-    <div class="coffee">
+    <button class="coffee" id="coffeeCup" type="button" aria-label="打開咖啡照片">
+        <span class="coffee-saucer"></span>
+        <span class="coffee-cup">
+            <span class="coffee-liquid"></span>
+        </span>
+        <span class="coffee-handle"></span>
         <span class="steam s1"></span>
         <span class="steam s2"></span>
-    </div>
+    </button>
 
     <!-- 書 -->
     <div class="book" id="book">
@@ -48,11 +63,19 @@
         <!-- 封面一定放最後 -->
         <div class="cover">
 
-            <div class="cover-border"></div>
+            <div class="cover-face">
 
-            <h1>Our Story</h1>
+                <div class="cover-border"></div>
 
-            <p class="since">Since 2026</p>
+                <h1>Our Story</h1>
+
+                <p class="since">Since 2026</p>
+
+            </div>
+
+            <div class="cover-back">
+                <p>For every little day</p>
+            </div>
 
         </div>
 
@@ -60,7 +83,9 @@
 
 </div>
 
+<script src="js/pageTurn.js"></script>
 <script src="js/main.js"></script>
+<script src="js/effects.js"></script>
 
 </body>
 </html>
