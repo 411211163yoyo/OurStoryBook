@@ -1,18 +1,91 @@
 const coffeeMoments = [
     {
-        title: "Morning latte",
-        date: "Photo coming soon",
-        image: ""
+        title: "Coffee 01",
+        date: "",
+        image: "assets/coffee/coffee-01.jpg"
     },
     {
-        title: "Hand brewed coffee",
-        date: "Photo coming soon",
-        image: ""
+        title: "Coffee 02",
+        date: "",
+        image: "assets/coffee/coffee-02.jpg"
     },
     {
-        title: "A quiet cup",
-        date: "Photo coming soon",
-        image: ""
+        title: "Coffee 03",
+        date: "",
+        image: "assets/coffee/coffee-03.jpg"
+    },
+    {
+        title: "Coffee 04",
+        date: "",
+        image: "assets/coffee/coffee-04.jpg"
+    },
+    {
+        title: "Coffee 05",
+        date: "",
+        image: "assets/coffee/coffee-05.jpg"
+    },
+    {
+        title: "Coffee 06",
+        date: "",
+        image: "assets/coffee/coffee-06.jpg"
+    },
+    {
+        title: "Coffee 07",
+        date: "",
+        image: "assets/coffee/coffee-07.jpg"
+    },
+    {
+        title: "Coffee 08",
+        date: "",
+        image: "assets/coffee/coffee-08.jpg"
+    },
+    {
+        title: "Coffee 09",
+        date: "",
+        image: "assets/coffee/coffee-09.jpg"
+    },
+    {
+        title: "Coffee 10",
+        date: "",
+        image: "assets/coffee/coffee-10.jpg"
+    },
+    {
+        title: "Coffee 11",
+        date: "",
+        image: "assets/coffee/coffee-11.jpg"
+    }
+];
+
+const snackMoments = [
+    {
+        title: "宵夜 01",
+        date: "",
+        image: "assets/snack/snack-01.jpg"
+    },
+    {
+        title: "宵夜 02",
+        date: "",
+        image: "assets/snack/snack-02.jpg"
+    },
+    {
+        title: "宵夜 03",
+        date: "",
+        image: "assets/snack/snack-03.jpg"
+    },
+    {
+        title: "宵夜 04",
+        date: "",
+        image: "assets/snack/snack-04.jpg"
+    },
+    {
+        title: "宵夜 05",
+        date: "",
+        image: "assets/snack/snack-05.jpg"
+    },
+    {
+        title: "宵夜 06",
+        date: "",
+        image: "assets/snack/snack-06.jpg"
     }
 ];
 
@@ -55,21 +128,21 @@ function createObjectModal(){
     return modal;
 }
 
-function createPolaroidSpread(){
+function createPolaroidSpread({ items, className = "", closeLabel }){
     const spread = document.createElement("div");
-    spread.className = "polaroid-spread";
+    spread.className = `polaroid-spread ${className}`.trim();
     spread.hidden = true;
     spread.innerHTML = `
-        <button class="polaroid-spread__close" type="button" aria-label="收起咖啡照片">×</button>
+        <button class="polaroid-spread__close" type="button" aria-label="${closeLabel}">×</button>
         <div class="polaroid-spread__photos">
-            ${coffeeMoments.map((item, index) => `
+            ${items.map((item, index) => `
                 <article class="polaroid-card polaroid-card--${index + 1}">
                     ${item.image
                         ? `<img src="${item.image}" alt="${item.title}">`
                         : `<div class="polaroid-card__placeholder" aria-hidden="true"><span>${String(index + 1).padStart(2, "0")}</span></div>`
                     }
                     <h3>${item.title}</h3>
-                    <p>${item.date}</p>
+                    ${item.date ? `<p>${item.date}</p>` : ""}
                 </article>
             `).join("")}
         </div>
@@ -103,26 +176,42 @@ function closeObjectModal(modal){
     document.body.classList.remove("modal-open");
 }
 
-function openPolaroids(spread){
+function openPolaroids(spread, trigger){
+    document.querySelectorAll(".polaroid-spread").forEach((item) => {
+        if(item !== spread && !item.hidden){
+            closePolaroids(item, document.querySelector(`[aria-controls="${item.id}"]`));
+        }
+    });
+
+    document.querySelectorAll(".photo-stack").forEach((stack) => {
+        stack.classList.add("is-hidden");
+    });
+
     spread.hidden = false;
     requestAnimationFrame(() => {
         spread.classList.add("is-visible");
     });
 }
 
-function closePolaroids(spread){
+function closePolaroids(spread, trigger){
     spread.classList.remove("is-visible");
 
     setTimeout(() => {
         spread.hidden = true;
+
+        if(!document.querySelector(".polaroid-spread.is-visible")){
+            document.querySelectorAll(".photo-stack").forEach((stack) => {
+                stack.classList.remove("is-hidden");
+            });
+        }
     }, 280);
 }
 
-function togglePolaroids(spread){
+function togglePolaroids(spread, trigger){
     if(spread.hidden){
-        openPolaroids(spread);
+        openPolaroids(spread, trigger);
     }else{
-        closePolaroids(spread);
+        closePolaroids(spread, trigger);
     }
 }
 
@@ -144,14 +233,35 @@ function renderRecordPlayer(){
 }
 
 const objectModal = createObjectModal();
-const polaroidSpread = createPolaroidSpread();
+const polaroidSpread = createPolaroidSpread({
+    items: coffeeMoments,
+    closeLabel: "收起咖啡照片"
+});
+const snackSpread = createPolaroidSpread({
+    items: snackMoments,
+    className: "polaroid-spread--snack",
+    closeLabel: "收起宵夜照片"
+});
 const coffeeCup = document.getElementById("coffeeCup");
+const snackPlate = document.getElementById("snackPlate");
 const recordPlayer = document.getElementById("recordPlayer");
+
+polaroidSpread.id = "coffeePolaroids";
+snackSpread.id = "snackPolaroids";
+coffeeCup?.setAttribute("aria-controls", polaroidSpread.id);
+snackPlate?.setAttribute("aria-controls", snackSpread.id);
 
 if(coffeeCup){
     coffeeCup.addEventListener("click", (event) => {
         event.stopPropagation();
-        togglePolaroids(polaroidSpread);
+        togglePolaroids(polaroidSpread, coffeeCup);
+    });
+}
+
+if(snackPlate){
+    snackPlate.addEventListener("click", (event) => {
+        event.stopPropagation();
+        togglePolaroids(snackSpread, snackPlate);
     });
 }
 

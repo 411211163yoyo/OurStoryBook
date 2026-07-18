@@ -21,6 +21,105 @@ const storyPages = [
         image: "",
         music: "",
         text: "..."
+    },
+
+    {
+        id: "coffee-days",
+        type: "chapter",
+        date: "Chapter 02",
+        title: "Coffee Days",
+        bookmark: "Coffee",
+        image: "",
+        music: "",
+        text: "..."
+    },
+
+    {
+        id: "small-things",
+        type: "chapter",
+        date: "Chapter 03",
+        title: "Small Things",
+        bookmark: "Small",
+        image: "",
+        music: "",
+        text: "..."
+    },
+
+    {
+        id: "walks",
+        type: "chapter",
+        date: "Chapter 04",
+        title: "Walks",
+        bookmark: "Walks",
+        image: "",
+        music: "",
+        text: "..."
+    },
+
+    {
+        id: "music",
+        type: "chapter",
+        date: "Chapter 05",
+        title: "Music",
+        bookmark: "Music",
+        image: "",
+        music: "",
+        text: "..."
+    },
+
+    {
+        id: "ordinary-days",
+        type: "chapter",
+        date: "Chapter 06",
+        title: "Ordinary Days",
+        bookmark: "Days",
+        image: "",
+        music: "",
+        text: "..."
+    },
+
+    {
+        id: "photos",
+        type: "chapter",
+        date: "Chapter 07",
+        title: "Photos",
+        bookmark: "Photos",
+        image: "",
+        music: "",
+        text: "..."
+    },
+
+    {
+        id: "letters",
+        type: "chapter",
+        date: "Chapter 08",
+        title: "Letters",
+        bookmark: "Letters",
+        image: "",
+        music: "",
+        text: "..."
+    },
+
+    {
+        id: "promise",
+        type: "chapter",
+        date: "Chapter 09",
+        title: "Promise",
+        bookmark: "Promise",
+        image: "",
+        music: "",
+        text: "..."
+    },
+
+    {
+        id: "forever",
+        type: "chapter",
+        date: "Chapter 10",
+        title: "Forever",
+        bookmark: "Forever",
+        image: "",
+        music: "",
+        text: "..."
     }
 
     // 之後要加頁，複製這個格式貼上就好：
@@ -139,6 +238,7 @@ function renderBookmarks(){
         btn.className = "bookmark";
         btn.textContent = page.bookmark || page.title;
         btn.dataset.page = index;
+        btn.style.setProperty("--bookmark-index", index);
 
         btn.addEventListener("click", (e) => {
             e.stopPropagation();
@@ -152,6 +252,20 @@ function renderBookmarks(){
 
 }
 
+function updateBookmarkState(currentPage){
+
+    if(!bookmarksContainer) return;
+
+    bookmarksContainer.querySelectorAll(".bookmark").forEach((bookmark) => {
+        const page = Number(bookmark.dataset.page);
+        const isActive = page === currentPage;
+
+        bookmark.classList.toggle("active", isActive);
+        bookmark.setAttribute("aria-current", isActive ? "page" : "false");
+    });
+
+}
+
 
 // =====================================================
 // 初始化
@@ -161,7 +275,9 @@ renderPages();
 
 pageTurn = initPageTurn({
     book,
-    pagesContainer
+    pagesContainer,
+    onPageChange: updateBookmarkState
 });
 
 renderBookmarks();
+updateBookmarkState(0);

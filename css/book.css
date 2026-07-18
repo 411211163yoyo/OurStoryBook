@@ -17,17 +17,17 @@
 
     overflow:visible;
 
-    border-radius:14px;
+    border-radius:8px;
 
     box-shadow:
-        -9px 8px 0 #2d1213,
-        -15px 14px 0 rgba(63,29,25,.55),
-        -20px 22px 32px rgba(25,12,8,.24),
+        -5px 6px 0 #2d1213,
+        -9px 11px 0 rgba(63,29,25,.42),
+        -16px 20px 28px rgba(25,12,8,.20),
         0 28px 60px rgba(0,0,0,.42);
 
     transition:
-        transform 1s cubic-bezier(.22, .9, .24, 1),
-        box-shadow 1s cubic-bezier(.22, .9, .24, 1);
+        transform .78s cubic-bezier(.22, .9, .24, 1),
+        box-shadow .78s cubic-bezier(.22, .9, .24, 1);
 
     will-change:transform;
 
@@ -39,19 +39,46 @@
 
     position:absolute;
 
-    left:12px;
-    top:0;
+    left:-4px;
+    top:-1px;
 
-    width:8px;
-    height:100%;
+    width:16px;
+    height:calc(100% + 2px);
 
-    background:linear-gradient(
+    border-radius:8px 3px 3px 8px;
+
+    background:
+    linear-gradient(
+        180deg,
+        transparent 12%,
+        rgba(228,203,139,.52) 12.4% 13%,
+        transparent 13.5% 84%,
+        rgba(228,203,139,.40) 84.4% 85%,
+        transparent 85.6%
+    ),
+    repeating-linear-gradient(
+        180deg,
+        rgba(255,255,255,.04) 0 1px,
+        transparent 1px 20px
+    ),
+    linear-gradient(
         90deg,
-        rgba(255,255,255,.18),
-        rgba(255,255,255,.03)
+        #21060c 0%,
+        #45101a 24%,
+        #7a1b2f 54%,
+        #3a0b15 100%
     );
 
-    z-index:23;
+    box-shadow:
+        inset 2px 0 5px rgba(255,255,255,.08),
+        inset -4px 0 7px rgba(0,0,0,.23),
+        -3px 6px 9px rgba(20,8,5,.15);
+
+    z-index:3;
+
+    pointer-events:none;
+
+    transition:opacity .12s ease;
 }
 
 .book::after{
@@ -72,7 +99,7 @@
         #2b0b12
     );
 
-    border-radius:0 0 12px 12px;
+    border-radius:0 0 8px 8px;
 
     box-shadow:
         inset 0 1px rgba(255,255,255,.10),
@@ -104,16 +131,8 @@
     z-index:-1;
 }
 
-.book:hover{
-    transform:
-        translateY(-4px)
-        rotate(-1deg);
-
-    box-shadow:
-        -9px 8px 0 #2d1213,
-        -15px 14px 0 rgba(63,29,25,.55),
-        -22px 24px 36px rgba(25,12,8,.26),
-        0 34px 70px rgba(0,0,0,.48);
+.book.open::before{
+    opacity:0;
 }
 
 .back-cover{
@@ -121,7 +140,7 @@
 
     inset:0;
 
-    border-radius:14px;
+    border-radius:8px;
 
     background:
     linear-gradient(
@@ -140,14 +159,14 @@
 
     inset:0;
 
-    border-radius:14px;
+    border-radius:8px;
 
     transform-style:preserve-3d;
 
     transform-origin:left;
 
     transition:
-    transform 1.2s cubic-bezier(.65,.02,.2,1);
+    transform .9s cubic-bezier(.32,.04,.18,1);
 
     z-index:20;
 }
@@ -158,7 +177,7 @@
 
     inset:0;
 
-    border-radius:14px;
+    border-radius:8px;
 
     border:1px solid rgba(255,255,255,.04);
 
@@ -199,7 +218,7 @@
     inset:28px;
 
     border:1px solid rgba(228,203,139,.45);
-    border-radius:10px;
+    border-radius:5px;
 
     box-shadow:
         inset 0 0 0 1px rgba(255,245,203,.12),
@@ -272,7 +291,7 @@
 
     border:1px solid rgba(215,190,120,.7);
 
-    border-radius:10px;
+    border-radius:5px;
 
     pointer-events:none;
 
@@ -343,33 +362,16 @@
     transform:rotateY(-156deg);
 }
 
-.book:hover h1{
-    background:linear-gradient(
-        90deg,
-        #d8b36b 0%,
-        #fff6c9 50%,
-        #d8b36b 100%
-    );
-
-    background-size:200% 100%;
-
-    background-clip:text;
-    -webkit-background-clip:text;
-
-    color:transparent;
-
-    animation:goldShine .8s ease;
-}
-
 .bookmarks{
     position:absolute;
 
-    top:60px;
-    right:-38px;
+    top:0;
+    right:-25px;
 
     display:flex;
     flex-direction:column;
-    gap:10px;
+    justify-content:stretch;
+    gap:0;
 
     opacity:0;
     pointer-events:none;
@@ -377,6 +379,9 @@
     transition:opacity .4s ease .5s;
 
     z-index:30;
+
+    width:26px;
+    height:100%;
 }
 
 .book.open .bookmarks{
@@ -389,41 +394,98 @@
 
     position:relative;
 
-    min-height:86px;
+    flex:1 1 0;
 
-    padding:12px 7px;
+    min-height:0;
 
-    background:linear-gradient(180deg, #9b263d, #661223);
+    padding:4px 3px;
+
+    background:
+        linear-gradient(
+            180deg,
+            hsl(347 52% calc(44% - var(--bookmark-index) * 1.05%)),
+            hsl(346 48% calc(33% - var(--bookmark-index) * .95%))
+        );
     color:#e4cb8b;
 
     border:none;
-    border-radius:0 6px 6px 0;
+    border-radius:0 5px 5px 0;
+    border-left:1px solid rgba(58,17,23,.34);
 
     font-family:"Cormorant Garamond", serif;
-    font-size:13px;
-    letter-spacing:2px;
+    font-size:10px;
+    line-height:1;
+    letter-spacing:1px;
 
     cursor:pointer;
 
     box-shadow:
-        2px 3px 8px rgba(0,0,0,.28),
-        inset 1px 0 rgba(255,255,255,.12);
+        2px 1px 4px rgba(0,0,0,.16),
+        inset 1px 0 rgba(255,255,255,.10);
 
     transition:
         background .2s ease,
-        transform .2s ease;
+        transform .2s ease,
+        filter .2s ease;
 }
 
 .bookmark:hover{
-    background:linear-gradient(180deg, #b6314d, #7c1930);
+    transform:translateX(2px);
+    filter:brightness(1.08);
+}
+
+.bookmark.active{
+    color:#fff4c8;
+    filter:saturate(1.18) brightness(1.08);
     transform:translateX(3px);
+    box-shadow:
+        3px 2px 7px rgba(0,0,0,.25),
+        inset 1px 0 rgba(255,255,255,.18);
+}
+
+@media (hover: hover) and (pointer: fine){
+
+    .book:not(.open):not(.closing):hover{
+        transform:
+            translateY(-4px)
+            rotate(-1deg);
+
+        box-shadow:
+            -5px 6px 0 #2d1213,
+            -9px 11px 0 rgba(63,29,25,.42),
+            -18px 22px 32px rgba(25,12,8,.22),
+            0 34px 70px rgba(0,0,0,.48);
+    }
+
+    .book:not(.open):not(.closing):hover h1{
+        background:linear-gradient(
+            90deg,
+            #d8b36b 0%,
+            #fff6c9 50%,
+            #d8b36b 100%
+        );
+
+        background-size:200% 100%;
+
+        background-clip:text;
+        -webkit-background-clip:text;
+
+        color:transparent;
+
+        animation:goldShine .8s ease;
+    }
+
 }
 
 @media (max-width: 720px){
 
+    .desk{
+        padding-top:170px;
+    }
+
     .book{
-        width:clamp(218px, 66vw, 284px);
-        height:clamp(306px, 92vw, 402px);
+        width:clamp(188px, 58vw, 238px);
+        height:clamp(264px, 81vw, 336px);
     }
 
     .book.open{
@@ -433,15 +495,14 @@
     }
 
     .bookmarks{
-        top:46px;
-        right:-30px;
-        gap:8px;
+        right:-20px;
+        width:21px;
     }
 
     .bookmark{
-        min-height:68px;
-        padding:9px 5px;
-        font-size:11px;
+        padding:3px 2px;
+        font-size:8px;
+        letter-spacing:.5px;
     }
 
 }

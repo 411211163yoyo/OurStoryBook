@@ -39,7 +39,7 @@
 .pages{
     position:absolute;
 
-    inset:0;
+    inset:7px 6px 8px 10px;
 
     overflow:visible;
 
@@ -75,13 +75,13 @@
 .page-corner{
     position:absolute;
 
-    right:0;
+    right:1px;
 
-    bottom:0;
+    bottom:1px;
 
-    width:52px;
+    width:30px;
 
-    height:52px;
+    height:30px;
 
     cursor:pointer;
 
@@ -97,23 +97,45 @@
 
     bottom:0;
 
-    width:52px;
+    width:30px;
 
-    height:52px;
+    height:30px;
 
-    background:linear-gradient(
-        135deg,
-        transparent 50%,
-        #eadcc4 50%,
-        #fff7e8 76%
-    );
+    border-radius:1px 0 2px 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            transparent 0 48%,
+            rgba(169,128,81,.12) 49%,
+            #e9d7ba 50%,
+            #fff6e6 68%,
+            #d8c29f 100%
+        );
 
     box-shadow:
-        -3px -3px 8px rgba(0,0,0,.10);
+        -3px -3px 6px rgba(83,53,31,.08),
+        inset -2px -2px 4px rgba(123,81,44,.12);
+}
+
+.page-corner::after{
+    content:"";
+
+    position:absolute;
+
+    right:6px;
+    bottom:6px;
+
+    width:13px;
+    height:1px;
+
+    background:rgba(122,86,48,.18);
+
+    transform:rotate(-45deg);
 }
 
 .page-corner:hover{
-    transform:scale(1.08);
+    transform:translate(-2px, -2px) scale(1.03);
 }
 
 .chapter-content{
@@ -192,7 +214,7 @@
 
     overflow:hidden;
 
-    border-radius:14px;
+    border-radius:0;
 
     backface-visibility:hidden;
 
@@ -312,8 +334,8 @@
 
     .page-corner,
     .page-corner::before{
-        width:44px;
-        height:44px;
+        width:24px;
+        height:24px;
     }
 
 }

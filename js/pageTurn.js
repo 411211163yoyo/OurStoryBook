@@ -1,7 +1,24 @@
-function initPageTurn({ book, pagesContainer }){
+function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
 
     let currentPage = 0;
     let isBookOpen = false;
+    let transitionState = "closed";
+    let scheduledTimers = [];
+
+    function schedule(callback, delay){
+        const timer = setTimeout(() => {
+            scheduledTimers = scheduledTimers.filter((item) => item !== timer);
+            callback();
+        }, delay);
+
+        scheduledTimers.push(timer);
+        return timer;
+    }
+
+    function clearScheduledTimers(){
+        scheduledTimers.forEach((timer) => clearTimeout(timer));
+        scheduledTimers = [];
+    }
 
     function getPageElements(){
         return document.querySelectorAll(".page");
@@ -9,10 +26,17 @@ function initPageTurn({ book, pagesContainer }){
 
     function openBook(){
 
+        if(transitionState === "opening" || transitionState === "open") return;
+
+        clearScheduledTimers();
+        transitionState = "opening";
+
+        book.classList.remove("closing");
         book.classList.add("open");
 
-        setTimeout(() => {
+        schedule(() => {
             book.classList.add("opened");
+            transitionState = "open";
         }, 400);
 
         isBookOpen = true;
@@ -21,28 +45,39 @@ function initPageTurn({ book, pagesContainer }){
 
     function closeBook(){
 
+        if(transitionState === "closing" || transitionState === "closed") return;
+
+        clearScheduledTimers();
+        transitionState = "closing";
+        book.classList.add("closing");
+
         const pages = [...getPageElements()].reverse();
 
         pages.forEach((page, index) => {
-            setTimeout(() => {
+            schedule(() => {
                 page.classList.remove("flipped");
-            }, index * 180);
+            }, index * 70);
         });
 
-        setTimeout(() => {
+        schedule(() => {
             book.classList.remove("opened");
-        }, 200);
+        }, 120);
 
-        setTimeout(() => {
+        schedule(() => {
             book.classList.remove("open");
-        }, 700);
+            book.classList.remove("closing");
+            transitionState = "closed";
+        }, 430);
 
         currentPage = 0;
         isBookOpen = false;
+        onPageChange(currentPage);
 
     }
 
     function goToPage(target){
+
+        if(transitionState === "closing") return;
 
         const pages = getPageElements();
 
@@ -64,6 +99,8 @@ function initPageTurn({ book, pagesContainer }){
 
         }
 
+        onPageChange(currentPage);
+
     }
 
     book.addEventListener("click", (e) => {
@@ -76,7 +113,7 @@ function initPageTurn({ book, pagesContainer }){
 
         if(!isBookOpen){
             openBook();
-        }else{
+        }else if(transitionState === "open"){
             // 不管翻到第幾頁，點書本都直接關閉並重置回封面
             closeBook();
         }
@@ -91,9 +128,10 @@ function initPageTurn({ book, pagesContainer }){
 
             const pages = getPageElements();
 
-            if(currentPage < pages.length - 1){
+            if(transitionState === "open" && currentPage < pages.length - 1){
                 pages[currentPage].classList.add("flipped");
                 currentPage++;
+                onPageChange(currentPage);
             }
 
             return;
@@ -102,12 +140,13 @@ function initPageTurn({ book, pagesContainer }){
 
         const flippedPage = e.target.closest(".page.flipped");
 
-        if(flippedPage && currentPage > 0){
+        if(transitionState === "open" && flippedPage && currentPage > 0){
 
             e.stopPropagation();
 
             currentPage--;
             getPageElements()[currentPage].classList.remove("flipped");
+            onPageChange(currentPage);
 
         }
 
