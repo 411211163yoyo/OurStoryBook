@@ -24,6 +24,10 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
         return document.querySelectorAll(".page");
     }
 
+    function updateBookDepthState(){
+        book.classList.toggle("has-flipped-pages", currentPage > 0);
+    }
+
     function openBook(){
 
         if(transitionState === "opening" || transitionState === "open") return;
@@ -50,28 +54,22 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
         clearScheduledTimers();
         transitionState = "closing";
         book.classList.add("closing");
+        book.classList.remove("opened");
 
-        const pages = [...getPageElements()].reverse();
-
-        pages.forEach((page, index) => {
-            schedule(() => {
+        schedule(() => {
+            getPageElements().forEach((page) => {
                 page.classList.remove("flipped");
-            }, index * 70);
-        });
+            });
 
-        schedule(() => {
-            book.classList.remove("opened");
-        }, 120);
-
-        schedule(() => {
+            currentPage = 0;
+            updateBookDepthState();
             book.classList.remove("open");
             book.classList.remove("closing");
             transitionState = "closed";
-        }, 430);
+            onPageChange(currentPage);
+        }, 880);
 
-        currentPage = 0;
         isBookOpen = false;
-        onPageChange(currentPage);
 
     }
 
@@ -100,6 +98,7 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
         }
 
         onPageChange(currentPage);
+        updateBookDepthState();
 
     }
 
@@ -132,6 +131,7 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
                 pages[currentPage].classList.add("flipped");
                 currentPage++;
                 onPageChange(currentPage);
+                updateBookDepthState();
             }
 
             return;
@@ -147,6 +147,7 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
             currentPage--;
             getPageElements()[currentPage].classList.remove("flipped");
             onPageChange(currentPage);
+            updateBookDepthState();
 
         }
 

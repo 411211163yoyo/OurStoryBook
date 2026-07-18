@@ -48,6 +48,30 @@
     perspective:2000px;
 
     z-index:10;
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transition:opacity .12s ease;
+}
+
+.book.open .pages{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+
+.book.closing .pages{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition-duration:.08s;
+    z-index:1;
+}
+
+.book.closing .page{
+    transition:none;
 }
 
 .page{
