@@ -142,6 +142,11 @@ body.reader-open .record-player{
     opacity:0;
 }
 
+.book.open .back-cover{
+    opacity:0;
+    pointer-events:none;
+}
+
 .back-cover{
     position:absolute;
 
@@ -404,6 +409,14 @@ body.reader-open .record-player{
         0 30px 80px rgba(0,0,0,.48);
 }
 
+.book.open .pages{
+    z-index:60;
+}
+
+.book.open .cover{
+    z-index:1;
+}
+
 .book.closing{
     transform:translate(-50%, -50%) scale(.96);
 }
@@ -411,7 +424,6 @@ body.reader-open .record-player{
 .book.opened .cover{
     opacity:0;
     transform:rotateY(-48deg) translateX(-10px);
-    z-index:4;
     pointer-events:none;
 }
 
@@ -421,6 +433,10 @@ body.reader-open .record-player{
     transition:
         transform .56s cubic-bezier(.2,.72,.18,1);
     z-index:24;
+}
+
+.book.closing .back-cover{
+    opacity:1;
 }
 
 .book.closing .bookmarks{

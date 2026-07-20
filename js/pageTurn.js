@@ -55,9 +55,9 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
         document.body.classList.add("reader-open");
         book.classList.remove("closing");
         book.classList.add("open");
+        book.classList.add("opened");
 
         openTimer = setTimeout(() => {
-            book.classList.add("opened");
             transitionState = "open";
         }, 40);
     }

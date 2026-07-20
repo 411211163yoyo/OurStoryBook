@@ -134,6 +134,7 @@
     opacity:1;
     visibility:visible;
     pointer-events:auto;
+    z-index:60;
 }
 
 .book.closing .pages{
