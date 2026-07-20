@@ -275,6 +275,8 @@
 }
 
 .page-nav{
+    --page-mark-angle:0deg;
+
     appearance:none;
 
     width:32px;
@@ -289,8 +291,8 @@
     background:rgba(91,68,49,.06);
     color:rgba(96,72,55,.70);
 
-    font-family:"Cormorant Garamond", serif;
-    font-size:25px;
+    opacity:1;
+
     line-height:1;
 
     cursor:pointer;
@@ -299,8 +301,28 @@
 
     transition:
         transform .2s ease,
-        opacity .2s ease,
+        color .2s ease,
         background .2s ease;
+}
+
+.page-nav::before{
+    content:"";
+
+    width:11px;
+    height:14px;
+
+    border-top:1.5px solid currentColor;
+    border-bottom:1.5px solid currentColor;
+
+    transform:skewX(var(--page-mark-angle));
+}
+
+.page-nav--prev{
+    --page-mark-angle:14deg;
+}
+
+.page-nav--next{
+    --page-mark-angle:-14deg;
 }
 
 .page-nav:hover,
@@ -310,7 +332,8 @@
 }
 
 .page-nav:disabled{
-    opacity:.28;
+    color:rgba(96,72,55,.70);
+    opacity:1;
     cursor:default;
     transform:none;
 }
