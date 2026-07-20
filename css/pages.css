@@ -53,12 +53,18 @@
     border-radius:1px;
 
     background:
+        radial-gradient(ellipse at 48% 18%, rgba(255,255,255,.42), transparent 36%),
         linear-gradient(
             90deg,
-            rgba(112,72,38,.16) 0%,
+            rgba(112,72,38,.20) 0%,
             transparent 14%,
             transparent 86%,
             rgba(255,255,255,.20) 100%
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0 33px,
+            rgba(133,97,61,.035) 33px 34px
         ),
         radial-gradient(
             rgba(115,83,48,.08) 1px,
@@ -66,12 +72,14 @@
         ),
         linear-gradient(
             180deg,
-            #fff8eb,
-            #f4ead7 68%,
-            #eadcc4
+            #fffaf0,
+            #f5ead8 68%,
+            #ead9bd
         );
 
     background-size:
+        100% 100%,
+        100% 100%,
         100% 100%,
         18px 18px,
         100% 100%;
@@ -79,11 +87,12 @@
     box-shadow:
         inset 14px 0 28px rgba(92,53,25,.13),
         inset -1px 0 rgba(255,255,255,.72),
+        inset 0 0 36px rgba(104,69,36,.07),
         1px 0 2px rgba(0,0,0,.05);
 
     transition:
-        opacity .22s ease,
-        visibility .22s ease;
+        opacity .08s ease,
+        visibility .08s ease;
 }
 
 .pages::before{
@@ -140,13 +149,13 @@
 
     opacity:0;
 
-    transform:translateX(18px);
+    transform:translateX(10px);
 
     pointer-events:none;
 
     transition:
-        opacity .34s ease,
-        transform .42s cubic-bezier(.2,.72,.18,1);
+        opacity .18s ease,
+        transform .24s cubic-bezier(.2,.72,.18,1);
 
     will-change:opacity, transform;
 }

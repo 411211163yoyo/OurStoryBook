@@ -38,7 +38,7 @@ body.reader-open .photo-stack,
 body.reader-open .record-player{
     opacity:0;
     pointer-events:none;
-    filter:blur(4px);
+    filter:blur(2px);
 }
 
 .book::before{
@@ -174,8 +174,8 @@ body.reader-open .record-player{
     transform-origin:left;
 
     transition:
-    transform .58s cubic-bezier(.32,.04,.18,1),
-    opacity .22s ease .2s;
+    transform .34s cubic-bezier(.2,.72,.18,1),
+    opacity .12s ease;
 
     z-index:20;
 }
@@ -410,7 +410,7 @@ body.reader-open .record-player{
 
 .book.opened .cover{
     opacity:0;
-    transform:rotateY(-26deg) translateX(-16px);
+    transform:rotateY(-48deg) translateX(-10px);
     z-index:4;
     pointer-events:none;
 }

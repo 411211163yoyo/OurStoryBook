@@ -59,7 +59,7 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
         openTimer = setTimeout(() => {
             book.classList.add("opened");
             transitionState = "open";
-        }, 360);
+        }, 40);
     }
 
     function closeBook(){
