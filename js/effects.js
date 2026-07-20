@@ -97,6 +97,8 @@ const recordTracks = [
     }
 ];
 
+const storyShareUrl = "https://our-story-book.vercel.app";
+
 function createObjectModal(){
     const modal = document.createElement("div");
     modal.className = "object-modal";
@@ -232,6 +234,15 @@ function renderRecordPlayer(){
     `;
 }
 
+function renderSharePanel(){
+    return `
+        <div class="share-panel">
+            <img class="share-panel__qr" src="assets/share-qr.svg" alt="Our StoryBook QR code">
+            <a class="share-panel__link" href="${storyShareUrl}" target="_blank" rel="noreferrer">${storyShareUrl}</a>
+        </div>
+    `;
+}
+
 const objectModal = createObjectModal();
 const polaroidSpread = createPolaroidSpread({
     items: coffeeMoments,
@@ -245,6 +256,7 @@ const snackSpread = createPolaroidSpread({
 const coffeeCup = document.getElementById("coffeeCup");
 const snackPlate = document.getElementById("snackPlate");
 const recordPlayer = document.getElementById("recordPlayer");
+const shareCard = document.getElementById("shareCard");
 
 polaroidSpread.id = "coffeePolaroids";
 snackSpread.id = "snackPolaroids";
@@ -292,5 +304,16 @@ if(recordPlayer){
                 objectModal.querySelector(".record-panel__disc")?.classList.remove("is-playing");
             });
         }
+    });
+}
+
+if(shareCard){
+    shareCard.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openObjectModal(objectModal, {
+            eyebrow: "Phone view",
+            title: "Scan to open",
+            body: renderSharePanel()
+        });
     });
 }
