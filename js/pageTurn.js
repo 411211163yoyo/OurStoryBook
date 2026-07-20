@@ -51,6 +51,7 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
         transitionState = "opening";
         isBookOpen = true;
 
+        setActivePage(0, "backward");
         document.body.classList.add("reader-open");
         book.classList.remove("closing");
         book.classList.add("open");

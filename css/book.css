@@ -1,7 +1,7 @@
 .book{
-    width:clamp(240px,40vw,320px);
+    width:clamp(260px,42vw,350px);
 
-    height:clamp(330px,55vw,440px);
+    height:clamp(358px,58vw,482px);
 
     position:relative;
 
@@ -577,8 +577,8 @@ body.reader-open .record-player{
     }
 
     .book{
-        width:clamp(188px, 58vw, 238px);
-        height:clamp(264px, 81vw, 336px);
+        width:clamp(205px, 62vw, 260px);
+        height:clamp(288px, 86vw, 366px);
     }
 
     .book.open{
