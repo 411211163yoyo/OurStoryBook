@@ -16,11 +16,34 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
         return [...pagesContainer.querySelectorAll(".page")];
     }
 
+    function updatePageControls(pages){
+        const isFirstPage = currentPage === 0;
+        const isLastPage = currentPage === pages.length - 1;
+
+        if(pageCount){
+            pageCount.textContent = `${currentPage + 1} / ${pages.length}`;
+        }
+
+        if(prevButton){
+            prevButton.disabled = isFirstPage;
+            prevButton.classList.toggle("is-unavailable", isFirstPage);
+        }
+
+        if(nextButton){
+            nextButton.disabled = isLastPage;
+            nextButton.classList.toggle("is-unavailable", isLastPage);
+        }
+    }
+
     function setActivePage(target, direction = "forward"){
         const pages = getPageElements();
         const nextPage = Math.max(0, Math.min(target, pages.length - 1));
 
-        if(nextPage === currentPage && pages[nextPage]?.classList.contains("active")) return;
+        if(nextPage === currentPage && pages[nextPage]?.classList.contains("active")){
+            updatePageControls(pages);
+            onPageChange(currentPage);
+            return;
+        }
 
         pagesContainer.dataset.direction = direction;
         currentPage = nextPage;
@@ -29,17 +52,7 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
             page.classList.toggle("active", index === currentPage);
         });
 
-        if(pageCount){
-            pageCount.textContent = `${currentPage + 1} / ${pages.length}`;
-        }
-
-        if(prevButton){
-            prevButton.disabled = currentPage === 0;
-        }
-
-        if(nextButton){
-            nextButton.disabled = currentPage === pages.length - 1;
-        }
+        updatePageControls(pages);
 
         onPageChange(currentPage);
     }

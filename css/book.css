@@ -391,7 +391,7 @@ body.reader-open .record-player{
     left:50%;
     top:50%;
 
-    width:min(430px, calc(100vw - 46px));
+    width:min(500px, calc(100vw - 42px));
     height:auto;
     aspect-ratio:350 / 482;
 
@@ -592,7 +592,7 @@ body.reader-open .record-player{
     }
 
     .book.open{
-        width:min(350px, calc(100vw - 40px));
+        width:min(386px, calc(100vw - 28px));
         height:auto;
         aspect-ratio:350 / 482;
 
