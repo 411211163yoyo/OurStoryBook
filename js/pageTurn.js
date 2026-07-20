@@ -3,155 +3,147 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
     let currentPage = 0;
     let isBookOpen = false;
     let transitionState = "closed";
-    let scheduledTimers = [];
+    let openTimer;
+    let touchStartX = 0;
+    let touchStartY = 0;
 
-    function schedule(callback, delay){
-        const timer = setTimeout(() => {
-            scheduledTimers = scheduledTimers.filter((item) => item !== timer);
-            callback();
-        }, delay);
-
-        scheduledTimers.push(timer);
-        return timer;
-    }
-
-    function clearScheduledTimers(){
-        scheduledTimers.forEach((timer) => clearTimeout(timer));
-        scheduledTimers = [];
-    }
+    const pageCount = pagesContainer.querySelector(".page-count");
+    const prevButton = pagesContainer.querySelector(".page-nav--prev");
+    const nextButton = pagesContainer.querySelector(".page-nav--next");
 
     function getPageElements(){
-        return document.querySelectorAll(".page");
+        return [...pagesContainer.querySelectorAll(".page")];
     }
 
-    function updateBookDepthState(){
-        book.classList.toggle("has-flipped-pages", currentPage > 0);
+    function setActivePage(target, direction = "forward"){
+        const pages = getPageElements();
+        const nextPage = Math.max(0, Math.min(target, pages.length - 1));
+
+        if(nextPage === currentPage && pages[nextPage]?.classList.contains("active")) return;
+
+        pagesContainer.dataset.direction = direction;
+        currentPage = nextPage;
+
+        pages.forEach((page, index) => {
+            page.classList.toggle("active", index === currentPage);
+        });
+
+        if(pageCount){
+            pageCount.textContent = `${currentPage + 1} / ${pages.length}`;
+        }
+
+        if(prevButton){
+            prevButton.disabled = currentPage === 0;
+        }
+
+        if(nextButton){
+            nextButton.disabled = currentPage === pages.length - 1;
+        }
+
+        onPageChange(currentPage);
     }
 
     function openBook(){
-
         if(transitionState === "opening" || transitionState === "open") return;
 
-        clearScheduledTimers();
+        clearTimeout(openTimer);
         transitionState = "opening";
+        isBookOpen = true;
 
         book.classList.remove("closing");
         book.classList.add("open");
 
-        schedule(() => {
+        openTimer = setTimeout(() => {
             book.classList.add("opened");
             transitionState = "open";
-        }, 400);
-
-        isBookOpen = true;
-
+        }, 360);
     }
 
     function closeBook(){
-
         if(transitionState === "closing" || transitionState === "closed") return;
 
-        clearScheduledTimers();
+        clearTimeout(openTimer);
         transitionState = "closing";
+        isBookOpen = false;
+
         book.classList.add("closing");
         book.classList.remove("opened");
 
-        schedule(() => {
-            getPageElements().forEach((page) => {
-                page.classList.remove("flipped");
-            });
-
-            currentPage = 0;
-            updateBookDepthState();
+        openTimer = setTimeout(() => {
+            setActivePage(0, "backward");
             book.classList.remove("open");
             book.classList.remove("closing");
             transitionState = "closed";
-            onPageChange(currentPage);
-        }, 880);
-
-        isBookOpen = false;
-
+        }, 420);
     }
 
     function goToPage(target){
-
         if(transitionState === "closing") return;
 
-        const pages = getPageElements();
-
-        if(target === currentPage) return;
-
-        if(target > currentPage){
-
-            while(currentPage < target){
-                pages[currentPage].classList.add("flipped");
-                currentPage++;
-            }
-
-        }else{
-
-            while(currentPage > target){
-                currentPage--;
-                pages[currentPage].classList.remove("flipped");
-            }
-
-        }
-
-        onPageChange(currentPage);
-        updateBookDepthState();
-
-    }
-
-    book.addEventListener("click", (e) => {
-
-        if(e.target.closest(".page-corner")) return;
-        if(e.target.closest(".bookmark")) return;
-
-        // 已翻開那頁的背面，交給 pagesContainer 的監聽器處理「往回翻一頁」
-        if(e.target.closest(".page.flipped")) return;
+        const direction = target >= currentPage ? "forward" : "backward";
 
         if(!isBookOpen){
             openBook();
-        }else if(transitionState === "open"){
-            // 不管翻到第幾頁，點書本都直接關閉並重置回封面
-            closeBook();
         }
 
+        setActivePage(target, direction);
+    }
+
+    function nextPage(){
+        goToPage(currentPage + 1);
+    }
+
+    function previousPage(){
+        goToPage(currentPage - 1);
+    }
+
+    book.addEventListener("click", (event) => {
+        if(event.target.closest(".pages")) return;
+        if(event.target.closest(".bookmark")) return;
+
+        if(!isBookOpen){
+            openBook();
+        }
     });
 
-    pagesContainer.addEventListener("click", (e) => {
-
-        if(e.target.classList.contains("page-corner")){
-
-            e.stopPropagation();
-
-            const pages = getPageElements();
-
-            if(transitionState === "open" && currentPage < pages.length - 1){
-                pages[currentPage].classList.add("flipped");
-                currentPage++;
-                onPageChange(currentPage);
-                updateBookDepthState();
-            }
-
-            return;
-
-        }
-
-        const flippedPage = e.target.closest(".page.flipped");
-
-        if(transitionState === "open" && flippedPage && currentPage > 0){
-
-            e.stopPropagation();
-
-            currentPage--;
-            getPageElements()[currentPage].classList.remove("flipped");
-            onPageChange(currentPage);
-            updateBookDepthState();
-
-        }
-
+    prevButton?.addEventListener("click", (event) => {
+        event.stopPropagation();
+        previousPage();
     });
+
+    nextButton?.addEventListener("click", (event) => {
+        event.stopPropagation();
+        nextPage();
+    });
+
+    pagesContainer.addEventListener("touchstart", (event) => {
+        const touch = event.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+    }, { passive:true });
+
+    pagesContainer.addEventListener("touchend", (event) => {
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+
+        if(Math.abs(deltaX) < 42 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+        if(deltaX < 0){
+            nextPage();
+        }else{
+            previousPage();
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if(!isBookOpen) return;
+        if(event.key === "ArrowRight") nextPage();
+        if(event.key === "ArrowLeft") previousPage();
+        if(event.key === "Escape") closeBook();
+    });
+
+    setActivePage(0);
 
     return {
         openBook,

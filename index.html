@@ -11,53 +11,16 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+TC:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/global.css?v=20260720a">
-    <link rel="stylesheet" href="css/layout.css?v=20260720a">
-    <link rel="stylesheet" href="css/book.css?v=20260720a">
-    <link rel="stylesheet" href="css/pages.css?v=20260720a">
-    <link rel="stylesheet" href="css/animation.css?v=20260720a">
+    <link rel="stylesheet" href="css/global.css?v=20260720b">
+    <link rel="stylesheet" href="css/layout.css?v=20260720b">
+    <link rel="stylesheet" href="css/book.css?v=20260720b">
+    <link rel="stylesheet" href="css/pages.css?v=20260720b">
+    <link rel="stylesheet" href="css/animation.css?v=20260720b">
 </head>
 
 <body>
 
 <div class="desk">
-
-    <!-- 黑膠 -->
-    <button class="record-player" id="recordPlayer" type="button" aria-label="打開黑膠音樂">
-        <span class="record-platter">
-            <span class="record-disc"></span>
-            <span class="record-label"></span>
-        </span>
-        <span class="record-tonearm"></span>
-        <span class="record-base-light"></span>
-    </button>
-
-    <!-- 手機掃描入口 -->
-    <button class="share-card" id="shareCard" type="button" aria-label="打開手機掃描 QR code">
-        <span class="share-card__pin"></span>
-        <span class="share-card__label">Scan</span>
-        <span class="share-card__code" aria-hidden="true"></span>
-    </button>
-
-    <!-- 咖啡回憶照片 -->
-    <button class="photo-stack" id="coffeeCup" type="button" aria-label="打開咖啡照片">
-        <span class="photo-stack__card photo-stack__card--back"></span>
-        <span class="photo-stack__card photo-stack__card--middle"></span>
-        <span class="photo-stack__card photo-stack__card--front">
-            <img class="photo-stack__image" src="assets/coffee/coffee-01.jpg" alt="咖啡照片">
-            <span class="photo-stack__caption">Coffee</span>
-        </span>
-    </button>
-
-    <!-- 宵夜回憶照片 -->
-    <button class="photo-stack photo-stack--snack" id="snackPlate" type="button" aria-label="打開宵夜照片">
-        <span class="photo-stack__card photo-stack__card--back"></span>
-        <span class="photo-stack__card photo-stack__card--middle"></span>
-        <span class="photo-stack__card photo-stack__card--front">
-            <img class="photo-stack__image" src="assets/snack/snack-01.jpg" alt="宵夜照片">
-            <span class="photo-stack__caption">宵夜</span>
-        </span>
-    </button>
 
     <!-- 書 -->
     <div class="book" id="book">
@@ -71,9 +34,7 @@
         <!-- 書籤導覽（依 main.js 的 storyPages 自動產生按鈕） -->
         <div class="bookmarks" id="bookmarks"></div>
 
-        <!-- 所有書頁：由 main.js 依 storyPages 陣列動態產生，
-             這裡務必保持空白，不要再手刻 page-1 / page-2，
-             不然會跟 JS 產生的頁面疊在一起 -->
+        <!-- 信紙頁面：由 main.js 依 storyPages 陣列動態產生 -->
         <div class="pages"></div>
 
         <!-- 封面一定放最後 -->
@@ -99,9 +60,8 @@
 
 </div>
 
-<script src="js/pageTurn.js?v=20260720a"></script>
-<script src="js/main.js?v=20260720a"></script>
-<script src="js/effects.js?v=20260720a"></script>
+<script src="js/pageTurn.js?v=20260720b"></script>
+<script src="js/main.js?v=20260720b"></script>
 
 </body>
 </html>

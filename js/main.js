@@ -134,7 +134,7 @@ const storyPages = [
 
 ];
 
-function renderPageContent(page, face = "front"){
+function renderPageContent(page){
 
     if(!page){
         return `
@@ -146,7 +146,7 @@ function renderPageContent(page, face = "front"){
 
     if(page.type === "opening"){
         return `
-            <div class="opening-content ${face === "back" ? "page-back-preview" : ""}">
+            <div class="opening-content">
                 <p class="opening-title">${page.title}</p>
                 <p class="opening-text">${page.text}</p>
                 <p class="opening-year">${page.year}</p>
@@ -155,7 +155,7 @@ function renderPageContent(page, face = "front"){
     }
 
     return `
-        <div class="chapter-content ${face === "back" ? "page-back-preview" : ""}">
+        <div class="chapter-content">
             <p class="chapter-date">${page.date}</p>
             <h2 class="chapter-title">${page.title}</h2>
             <p class="chapter-text">${page.text || ""}</p>
@@ -177,12 +177,11 @@ let pageTurn;
 
 
 // =====================================================
-// 依 storyPages 動態產生每一頁的 DOM
+// 依 storyPages 動態產生信紙頁面
 // =====================================================
 
 function renderPages(){
 
-    // 清空，避免跟 HTML 裡殘留的內容疊在一起
     pagesContainer.innerHTML = "";
 
     const fragment = document.createDocumentFragment();
@@ -190,32 +189,22 @@ function renderPages(){
     storyPages.forEach((page, index) => {
 
         const section = document.createElement("section");
-        section.className = "page";
-        section.style.zIndex = storyPages.length - index;
+        section.className = `page${index === 0 ? " active" : ""}`;
+        section.dataset.page = index;
 
-        const front = document.createElement("div");
-        front.className = "page-front";
-
-        front.innerHTML = renderPageContent(page);
-
-        // 除了最後一頁，其餘每頁都自動加上翻頁折角
-        if(index < storyPages.length - 1){
-            const corner = document.createElement("div");
-            corner.className = "page-corner";
-            front.appendChild(corner);
-        }
-
-        const back = document.createElement("div");
-        back.className = "page-back";
-        back.innerHTML = renderPageContent(storyPages[index + 1], "back");
-
-        section.appendChild(front);
-        section.appendChild(back);
+        section.innerHTML = renderPageContent(page);
         fragment.appendChild(section);
 
     });
 
     pagesContainer.appendChild(fragment);
+    pagesContainer.insertAdjacentHTML("beforeend", `
+        <div class="page-controls" aria-label="切換故事頁">
+            <button class="page-nav page-nav--prev" type="button" aria-label="上一頁">‹</button>
+            <p class="page-count" aria-live="polite">1 / ${storyPages.length}</p>
+            <button class="page-nav page-nav--next" type="button" aria-label="下一頁">›</button>
+        </div>
+    `);
 
 }
 
