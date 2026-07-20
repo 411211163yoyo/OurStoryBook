@@ -2,25 +2,30 @@
 .chapter-content{
     width:100%;
     height:100%;
+    box-sizing:border-box;
 
     display:grid;
     align-content:center;
+    justify-items:center;
 
     text-align:center;
 
-    padding:48px 38px 72px;
+    padding:54px 34px 58px 48px;
 }
 
 .opening-title{
-    margin-bottom:42px;
+    margin-bottom:34px;
 
     color:#7b614f;
 
     font-family:"Cormorant Garamond", serif;
     font-size:clamp(28px,5vw,38px);
+    line-height:1.05;
 }
 
 .opening-text{
+    max-width:22ch;
+
     color:#604e47;
 
     font-family:"Cormorant Garamond", serif;
@@ -29,7 +34,7 @@
 }
 
 .opening-year{
-    margin-top:48px;
+    margin-top:36px;
 
     color:#9b8a74;
 
@@ -182,6 +187,8 @@
 }
 
 .chapter-title{
+    max-width:12ch;
+
     color:#5b4639;
 
     font-family:"Cormorant Garamond",serif;
@@ -216,9 +223,9 @@
 .page-controls{
     position:absolute;
 
-    left:24px;
-    right:24px;
-    bottom:18px;
+    left:26px;
+    right:20px;
+    bottom:16px;
 
     display:flex;
     align-items:center;
@@ -234,22 +241,22 @@
 
     position:absolute;
 
-    top:14px;
-    right:14px;
+    top:13px;
+    right:13px;
 
-    width:32px;
-    height:32px;
+    width:30px;
+    height:30px;
 
     display:grid;
     place-items:center;
 
-    border:1px solid rgba(132,96,64,.18);
+    border:1px solid rgba(126,91,58,.14);
     border-radius:50%;
 
-    background:rgba(255,250,240,.74);
-    color:#765844;
+    background:rgba(91,68,49,.07);
+    color:rgba(99,75,57,.72);
 
-    font-size:22px;
+    font-size:20px;
     line-height:1;
 
     cursor:pointer;
@@ -264,26 +271,26 @@
 .reader-close:hover,
 .reader-close:focus-visible{
     transform:translateY(-1px);
-    background:rgba(255,250,240,.96);
+    background:rgba(255,250,240,.62);
 }
 
 .page-nav{
     appearance:none;
 
-    width:34px;
-    height:34px;
+    width:32px;
+    height:32px;
 
     display:grid;
     place-items:center;
 
-    border:1px solid rgba(132,96,64,.20);
+    border:1px solid rgba(126,91,58,.13);
     border-radius:50%;
 
-    background:rgba(255,250,240,.68);
-    color:#765844;
+    background:rgba(91,68,49,.06);
+    color:rgba(96,72,55,.70);
 
     font-family:"Cormorant Garamond", serif;
-    font-size:28px;
+    font-size:25px;
     line-height:1;
 
     cursor:pointer;
@@ -299,7 +306,7 @@
 .page-nav:hover,
 .page-nav:focus-visible{
     transform:translateY(-1px);
-    background:rgba(255,250,240,.92);
+    background:rgba(255,250,240,.58);
 }
 
 .page-nav:disabled{
@@ -309,17 +316,17 @@
 }
 
 .page-count{
-    color:#9b8a74;
+    color:rgba(133,105,78,.58);
 
-    font-size:12px;
-    letter-spacing:2px;
+    font-size:11px;
+    letter-spacing:1.6px;
 }
 
 @media (max-width: 720px){
 
     .opening-content,
     .chapter-content{
-        padding:38px 24px 62px;
+        padding:44px 22px 52px 34px;
     }
 
     .opening-title{
@@ -327,7 +334,7 @@
     }
 
     .opening-year{
-        margin-top:36px;
+        margin-top:30px;
     }
 
     .chapter-text{
@@ -336,22 +343,22 @@
     }
 
     .page-controls{
-        left:18px;
-        right:18px;
-        bottom:14px;
+        left:22px;
+        right:14px;
+        bottom:13px;
     }
 
     .reader-close{
         top:12px;
         right:12px;
-        width:30px;
-        height:30px;
+        width:28px;
+        height:28px;
     }
 
     .page-nav{
-        width:30px;
-        height:30px;
-        font-size:24px;
+        width:28px;
+        height:28px;
+        font-size:22px;
     }
 
 }
