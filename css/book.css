@@ -179,7 +179,6 @@ body.reader-open .record-player{
     transform-origin:left;
 
     transition:
-    transform .34s cubic-bezier(.2,.72,.18,1),
     opacity .12s ease;
 
     z-index:20;
@@ -392,8 +391,9 @@ body.reader-open .record-player{
     left:50%;
     top:50%;
 
-    width:min(390px, calc(100vw - 46px));
-    height:min(760px, calc(100dvh - 34px));
+    width:min(430px, calc(100vw - 46px));
+    height:auto;
+    aspect-ratio:350 / 482;
 
     transform:
         translate(-50%, -50%)
@@ -427,15 +427,13 @@ body.reader-open .record-player{
 
 .book.opened .cover{
     opacity:0;
-    transform:rotateY(-48deg) translateX(-10px);
+    transform:none;
     pointer-events:none;
 }
 
 .book.closing .cover{
     opacity:1;
-    transform:rotateY(0deg);
-    transition:
-        transform .56s cubic-bezier(.2,.72,.18,1);
+    transform:none;
     z-index:24;
 }
 
@@ -447,14 +445,6 @@ body.reader-open .record-player{
     opacity:0;
     pointer-events:none;
     transition-delay:0s;
-}
-
-.book.closing .cover-face::before,
-.book.closing .cover-face::after,
-.book.closing .cover-border,
-.book.closing .cover h1,
-.book.closing .cover .since{
-    opacity:0;
 }
 
 .book.opened .cover-back p{
@@ -602,8 +592,9 @@ body.reader-open .record-player{
     }
 
     .book.open{
-        width:min(390px, calc(100vw - 36px));
-        height:min(760px, calc(100dvh - 28px));
+        width:min(350px, calc(100vw - 40px));
+        height:auto;
+        aspect-ratio:350 / 482;
 
         transform:
             translate(-50%, -50%)

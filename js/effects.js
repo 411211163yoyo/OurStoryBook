@@ -53,6 +53,21 @@ const coffeeMoments = [
         title: "Coffee 11",
         date: "",
         image: "assets/coffee/coffee-11.jpg"
+    },
+    {
+        title: "Coffee 12",
+        date: "",
+        image: "assets/coffee/coffee-12.jpg"
+    },
+    {
+        title: "Coffee 13",
+        date: "",
+        image: "assets/coffee/coffee-13.jpg"
+    },
+    {
+        title: "Coffee 14",
+        date: "",
+        image: "assets/coffee/coffee-14.jpg"
     }
 ];
 

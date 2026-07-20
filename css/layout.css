@@ -76,6 +76,7 @@ body{
     opacity:.96;
 
     pointer-events:none;
+    z-index:0;
 }
 
 .desk::after{
@@ -94,6 +95,19 @@ body{
         );
 
     pointer-events:none;
+    z-index:0;
+
+    transition:background .24s ease;
+}
+
+body.reader-open .desk::after{
+    background:
+        radial-gradient(ellipse at center, transparent 24%, rgba(11,7,5,.22) 76%),
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,.18),
+            rgba(0,0,0,.44)
+        );
 }
 
 .photo-stack{
@@ -849,6 +863,27 @@ body{
     transition-delay:.25s;
 }
 
+.polaroid-card--12{
+    --angle:8deg;
+    left:18%;
+    top:39%;
+    transition-delay:.19s;
+}
+
+.polaroid-card--13{
+    --angle:-9deg;
+    left:42%;
+    top:43%;
+    transition-delay:.29s;
+}
+
+.polaroid-card--14{
+    --angle:6deg;
+    right:13%;
+    top:42%;
+    transition-delay:.23s;
+}
+
 .polaroid-spread--snack .polaroid-card{
     left:auto;
     right:auto;
@@ -1063,6 +1098,21 @@ body{
     .polaroid-card--11{
         right:18%;
         bottom:5%;
+    }
+
+    .polaroid-card--12{
+        left:16%;
+        top:54%;
+    }
+
+    .polaroid-card--13{
+        left:48%;
+        top:56%;
+    }
+
+    .polaroid-card--14{
+        right:8%;
+        bottom:6%;
     }
 
     .polaroid-spread--snack .polaroid-card--1{
