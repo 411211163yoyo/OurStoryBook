@@ -34,6 +34,13 @@
     z-index:2;
 }
 
+body.reader-open .photo-stack,
+body.reader-open .record-player{
+    opacity:0;
+    pointer-events:none;
+    filter:blur(4px);
+}
+
 .book::before{
     content:"";
 
@@ -376,13 +383,29 @@
 }
 
 .book.open{
+    position:fixed;
+    left:50%;
+    top:50%;
+
+    width:min(390px, calc(100vw - 46px));
+    height:min(760px, calc(100dvh - 34px));
+
     transform:
-        translateY(-8px)
-        scale(1.08);
+        translate(-50%, -50%)
+        scale(1);
+
+    cursor:default;
+
+    z-index:70;
+
+    box-shadow:
+        -5px 6px 0 #2d1213,
+        -9px 11px 0 rgba(63,29,25,.42),
+        0 30px 80px rgba(0,0,0,.48);
 }
 
 .book.closing{
-    transform:none;
+    transform:translate(-50%, -50%) scale(.96);
 }
 
 .book.opened .cover{
@@ -559,10 +582,12 @@
     }
 
     .book.open{
+        width:min(390px, calc(100vw - 36px));
+        height:min(760px, calc(100dvh - 28px));
+
         transform:
-            translateX(0)
-            translateY(6px)
-            scale(1.02);
+            translate(-50%, -50%)
+            scale(1);
     }
 
     .bookmarks{

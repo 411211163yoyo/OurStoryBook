@@ -10,6 +10,7 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
     const pageCount = pagesContainer.querySelector(".page-count");
     const prevButton = pagesContainer.querySelector(".page-nav--prev");
     const nextButton = pagesContainer.querySelector(".page-nav--next");
+    const closeButton = pagesContainer.querySelector(".reader-close");
 
     function getPageElements(){
         return [...pagesContainer.querySelectorAll(".page")];
@@ -50,6 +51,7 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
         transitionState = "opening";
         isBookOpen = true;
 
+        document.body.classList.add("reader-open");
         book.classList.remove("closing");
         book.classList.add("open");
 
@@ -73,6 +75,7 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
             setActivePage(0, "backward");
             book.classList.remove("open");
             book.classList.remove("closing");
+            document.body.classList.remove("reader-open");
             transitionState = "closed";
         }, 420);
     }
@@ -114,6 +117,11 @@ function initPageTurn({ book, pagesContainer, onPageChange = () => {} }){
     nextButton?.addEventListener("click", (event) => {
         event.stopPropagation();
         nextPage();
+    });
+
+    closeButton?.addEventListener("click", (event) => {
+        event.stopPropagation();
+        closeBook();
     });
 
     pagesContainer.addEventListener("touchstart", (event) => {

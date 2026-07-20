@@ -58,32 +58,32 @@ const coffeeMoments = [
 
 const snackMoments = [
     {
-        title: "宵夜 01",
+        title: "Late Night 01",
         date: "",
         image: "assets/snack/snack-01.jpg"
     },
     {
-        title: "宵夜 02",
+        title: "Late Night 02",
         date: "",
         image: "assets/snack/snack-02.jpg"
     },
     {
-        title: "宵夜 03",
+        title: "Late Night 03",
         date: "",
         image: "assets/snack/snack-03.jpg"
     },
     {
-        title: "宵夜 04",
+        title: "Late Night 04",
         date: "",
         image: "assets/snack/snack-04.jpg"
     },
     {
-        title: "宵夜 05",
+        title: "Late Night 05",
         date: "",
         image: "assets/snack/snack-05.jpg"
     },
     {
-        title: "宵夜 06",
+        title: "Late Night 06",
         date: "",
         image: "assets/snack/snack-06.jpg"
     }
@@ -240,7 +240,7 @@ const polaroidSpread = createPolaroidSpread({
 const snackSpread = createPolaroidSpread({
     items: snackMoments,
     className: "polaroid-spread--snack",
-    closeLabel: "收起宵夜照片"
+    closeLabel: "收起 Late Night 照片"
 });
 const coffeeCup = document.getElementById("coffeeCup");
 const snackPlate = document.getElementById("snackPlate");

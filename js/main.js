@@ -199,6 +199,7 @@ function renderPages(){
 
     pagesContainer.appendChild(fragment);
     pagesContainer.insertAdjacentHTML("beforeend", `
+        <button class="reader-close" type="button" aria-label="關閉閱讀頁">×</button>
         <div class="page-controls" aria-label="切換故事頁">
             <button class="page-nav page-nav--prev" type="button" aria-label="上一頁">‹</button>
             <p class="page-count" aria-live="polite">1 / ${storyPages.length}</p>

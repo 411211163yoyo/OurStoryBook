@@ -224,10 +224,10 @@ body{
     appearance:none;
     padding:0;
 
-    width:190px;
-    height:145px;
+    width:218px;
+    height:158px;
 
-    border-radius:16px;
+    border-radius:10px;
 
     position:absolute;
 
@@ -235,13 +235,15 @@ body{
     top:10%;
 
     background:
-        linear-gradient(145deg, #5b352b, #2a1915 62%, #160d0b),
-        repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 22px);
+        radial-gradient(ellipse at 72% 26%, rgba(255,224,176,.12), transparent 18%),
+        linear-gradient(145deg, #674034 0%, #3b211b 56%, #1a0f0d 100%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 18px);
 
     box-shadow:
-        0 22px 38px rgba(0,0,0,.38),
+        0 24px 42px rgba(0,0,0,.40),
         inset 0 1px rgba(255,255,255,.12),
-        inset 0 -10px 18px rgba(0,0,0,.18);
+        inset 0 -12px 20px rgba(0,0,0,.22),
+        inset 8px 0 18px rgba(255,232,190,.04);
 
     z-index:1;
 
@@ -254,23 +256,50 @@ body{
         filter .25s ease;
 }
 
+.record-player::before,
+.record-player::after{
+    content:"";
+
+    position:absolute;
+
+    bottom:8px;
+
+    width:16px;
+    height:7px;
+
+    border-radius:0 0 5px 5px;
+
+    background:#140d0b;
+
+    box-shadow:0 3px 6px rgba(0,0,0,.34);
+}
+
+.record-player::before{
+    left:20px;
+}
+
+.record-player::after{
+    right:20px;
+}
+
 .record-platter{
     position:absolute;
 
-    left:18px;
-    top:15px;
+    left:17px;
+    top:18px;
 
-    width:112px;
-    height:112px;
+    width:120px;
+    height:120px;
 
     border-radius:50%;
 
     background:
-        radial-gradient(circle at center, #1b1b1b 0 58%, #343434 59% 61%, #0d0d0d 62% 100%);
+        radial-gradient(circle at center, #070707 0 58%, #252525 59% 62%, #101010 63% 70%, #3a332f 71% 75%, #17100e 76% 100%);
 
     box-shadow:
-        0 10px 18px rgba(0,0,0,.36),
-        inset 0 0 18px rgba(255,255,255,.06);
+        0 12px 22px rgba(0,0,0,.42),
+        inset 0 0 20px rgba(255,255,255,.07),
+        inset 0 0 0 5px rgba(255,255,255,.035);
 }
 
 .record-disc{
@@ -278,16 +307,18 @@ body{
 
     position:absolute;
 
-    inset:8px;
+    inset:9px;
 
     border-radius:50%;
 
     background:
-        radial-gradient(circle at center, #d9b76d 0 8%, #3a241e 8.5% 12%, transparent 12.5%),
-        linear-gradient(135deg, rgba(255,255,255,.18), transparent 34%),
-        repeating-radial-gradient(circle at center, #111 0 4px, #252525 4px 6px);
+        radial-gradient(circle at center, #d9b76d 0 9%, #3a241e 9.5% 13%, transparent 13.5%),
+        linear-gradient(135deg, rgba(255,255,255,.16), transparent 30%),
+        repeating-radial-gradient(circle at center, #0d0d0d 0 3px, #242424 3px 4px, #101010 4px 6px);
 
-    box-shadow:inset 0 0 12px rgba(255,255,255,.08);
+    box-shadow:
+        inset 0 0 12px rgba(255,255,255,.08),
+        inset 0 0 0 1px rgba(255,255,255,.06);
 }
 
 .record-player.is-playing .record-disc{
@@ -300,12 +331,13 @@ body{
     left:50%;
     top:50%;
 
-    width:22px;
-    height:22px;
+    width:24px;
+    height:24px;
 
     border-radius:50%;
 
-    background:#d9b76d;
+    background:
+        radial-gradient(circle, #f0cf82 0 52%, #bd8c43 53% 100%);
 
     transform:translate(-50%, -50%);
 }
@@ -313,20 +345,22 @@ body{
 .record-tonearm{
     position:absolute;
 
-    right:30px;
+    right:28px;
     top:24px;
 
-    width:52px;
-    height:8px;
+    width:68px;
+    height:7px;
 
-    background:linear-gradient(90deg, #d9d0c7, #7b736b);
+    background:linear-gradient(90deg, #e7dfd6, #9b9187 68%, #4c4540);
 
     border-radius:999px;
 
     transform-origin:right center;
-    transform:rotate(23deg);
+    transform:rotate(22deg);
 
-    box-shadow:0 4px 8px rgba(0,0,0,.32);
+    box-shadow:
+        0 4px 8px rgba(0,0,0,.32),
+        inset 0 1px rgba(255,255,255,.5);
 }
 
 .record-tonearm::before{
@@ -334,15 +368,20 @@ body{
 
     position:absolute;
 
-    right:-13px;
-    top:-10px;
+    right:-15px;
+    top:-12px;
 
-    width:24px;
-    height:24px;
+    width:30px;
+    height:30px;
 
     border-radius:50%;
 
-    background:radial-gradient(circle, #d8d0c8, #665d55);
+    background:
+        radial-gradient(circle at 36% 34%, #e4dcd4, #7c7168 72%);
+
+    box-shadow:
+        0 5px 9px rgba(0,0,0,.30),
+        inset 0 1px rgba(255,255,255,.55);
 }
 
 .record-tonearm::after{
@@ -350,31 +389,54 @@ body{
 
     position:absolute;
 
-    left:-8px;
-    top:2px;
+    left:-9px;
+    top:1px;
 
-    width:14px;
-    height:10px;
+    width:16px;
+    height:11px;
 
-    background:#1d1715;
+    background:linear-gradient(135deg, #2b2521, #0f0c0b);
 
-    border-radius:3px;
+    border-radius:3px 2px 2px 3px;
+
+    transform:rotate(6deg);
 }
 
 .record-base-light{
     position:absolute;
 
-    right:24px;
-    bottom:22px;
+    right:30px;
+    bottom:24px;
 
-    width:18px;
-    height:18px;
+    width:19px;
+    height:19px;
 
     border-radius:50%;
 
     background:radial-gradient(circle, #f1d397, #8f4d2d 70%);
 
     box-shadow:0 0 12px rgba(241,211,151,.36);
+}
+
+.record-base-light::after{
+    content:"";
+
+    position:absolute;
+
+    left:-30px;
+    top:-4px;
+
+    width:20px;
+    height:20px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(circle at 35% 32%, #baafa2, #4b3a32 70%);
+
+    box-shadow:
+        0 5px 9px rgba(0,0,0,.28),
+        inset 0 1px rgba(255,255,255,.22);
 }
 
 .record-player:hover,

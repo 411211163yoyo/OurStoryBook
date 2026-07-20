@@ -219,6 +219,44 @@
     pointer-events:none;
 }
 
+.reader-close{
+    appearance:none;
+
+    position:absolute;
+
+    top:14px;
+    right:14px;
+
+    width:32px;
+    height:32px;
+
+    display:grid;
+    place-items:center;
+
+    border:1px solid rgba(132,96,64,.18);
+    border-radius:50%;
+
+    background:rgba(255,250,240,.74);
+    color:#765844;
+
+    font-size:22px;
+    line-height:1;
+
+    cursor:pointer;
+
+    z-index:5;
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+.reader-close:hover,
+.reader-close:focus-visible{
+    transform:translateY(-1px);
+    background:rgba(255,250,240,.96);
+}
+
 .page-nav{
     appearance:none;
 
@@ -291,6 +329,13 @@
         left:18px;
         right:18px;
         bottom:14px;
+    }
+
+    .reader-close{
+        top:12px;
+        right:12px;
+        width:30px;
+        height:30px;
     }
 
     .page-nav{
