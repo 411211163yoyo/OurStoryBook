@@ -110,7 +110,7 @@ const recordTracks = [
         artist: "Piano version",
         src: "assets/music/a-million-dreams-piano.aac",
         startAt: 0,
-        note: "It will keep playing while you read."
+        note: "It keeps playing while you read."
     }
 ];
 
@@ -192,6 +192,8 @@ function openObjectModal(modal, { eyebrow, title, body }){
     modal.querySelector("#objectModalBody").innerHTML = body;
     modal.hidden = false;
     document.body.classList.add("modal-open");
+    recordPlayer?.setAttribute("aria-expanded", "true");
+    modal.querySelector(".object-modal__close")?.focus();
 }
 
 function closeObjectModal(modal){
@@ -201,6 +203,12 @@ function closeObjectModal(modal){
 
     modal.hidden = true;
     document.body.classList.remove("modal-open");
+    recordPlayer?.setAttribute("aria-expanded", "false");
+    recordPlayer?.focus();
+}
+
+function getPolaroidTrigger(spread){
+    return document.querySelector(`[aria-controls="${spread.id}"]`);
 }
 
 function openPolaroids(spread, trigger){
@@ -215,6 +223,7 @@ function openPolaroids(spread, trigger){
     });
 
     spread.hidden = false;
+    trigger?.setAttribute("aria-expanded", "true");
     requestAnimationFrame(() => {
         spread.classList.add("is-visible");
     });
@@ -222,6 +231,7 @@ function openPolaroids(spread, trigger){
 
 function closePolaroids(spread, trigger){
     spread.classList.remove("is-visible");
+    (trigger || getPolaroidTrigger(spread))?.setAttribute("aria-expanded", "false");
 
     setTimeout(() => {
         spread.hidden = true;
@@ -275,6 +285,7 @@ function bindRecordPanel(modal){
         playButton.textContent = recordAudio.paused
             ? "Play music"
             : "Pause music";
+        playButton.setAttribute("aria-pressed", String(!recordAudio.paused));
     }
 
     messageClose?.addEventListener("click", () => {
@@ -298,6 +309,16 @@ function bindRecordPanel(modal){
         hasRecordStarted = false;
         recordPlayer?.classList.remove("is-playing");
         panelDisc?.classList.remove("is-playing");
+        syncRecordButton();
+    };
+
+    recordAudio.onerror = () => {
+        hasRecordStarted = false;
+        recordPlayer?.classList.remove("is-playing");
+        panelDisc?.classList.remove("is-playing");
+        if(hint){
+            hint.textContent = "音樂載入失敗，請重新整理後再試一次。";
+        }
         syncRecordButton();
     };
 
@@ -350,7 +371,10 @@ const recordPlayer = document.getElementById("recordPlayer");
 polaroidSpread.id = "coffeePolaroids";
 snackSpread.id = "snackPolaroids";
 coffeeCup?.setAttribute("aria-controls", polaroidSpread.id);
+coffeeCup?.setAttribute("aria-expanded", "false");
 snackPlate?.setAttribute("aria-controls", snackSpread.id);
+snackPlate?.setAttribute("aria-expanded", "false");
+recordPlayer?.setAttribute("aria-expanded", "false");
 
 if(coffeeCup){
     coffeeCup.addEventListener("click", (event) => {

@@ -250,11 +250,12 @@
     display:grid;
     place-items:center;
 
-    border:1px solid rgba(126,91,58,.16);
+    border:1px solid rgba(126,91,58,.18);
     border-radius:5px;
 
-    background:rgba(255,250,240,.34);
-    color:rgba(99,75,57,.72);
+    background:
+        linear-gradient(180deg, rgba(255,252,244,.68), rgba(232,214,188,.30));
+    color:rgba(87,63,47,.82);
 
     font-size:20px;
     line-height:1;
@@ -277,8 +278,8 @@
 .page-nav{
     appearance:none;
 
-    min-width:56px;
-    height:27px;
+    min-width:58px;
+    height:28px;
 
     padding:0 12px;
 
@@ -288,8 +289,8 @@
     border:1px solid rgba(126,91,58,.16);
 
     background:
-        linear-gradient(180deg, rgba(255,252,244,.58), rgba(232,214,188,.24));
-    color:rgba(99,72,51,.74);
+        linear-gradient(180deg, rgba(255,252,244,.72), rgba(232,214,188,.30));
+    color:rgba(87,63,47,.82);
 
     opacity:1;
 
@@ -316,22 +317,22 @@
 }
 
 .page-nav--prev{
-    border-radius:10px 4px 4px 10px;
+    border-radius:999px 5px 5px 999px;
 }
 
 .page-nav--next{
-    border-radius:4px 10px 10px 4px;
+    border-radius:5px 999px 999px 5px;
 }
 
 .page-nav:hover,
 .page-nav:focus-visible{
     transform:translateY(-1px);
     background:
-        linear-gradient(180deg, rgba(255,252,244,.78), rgba(232,214,188,.38));
+        linear-gradient(180deg, rgba(255,252,244,.92), rgba(232,214,188,.42));
 }
 
 .page-nav:disabled{
-    color:rgba(96,72,55,.70);
+    color:rgba(87,63,47,.82);
     opacity:1;
     cursor:default;
     transform:none;
