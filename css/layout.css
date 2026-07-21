@@ -619,6 +619,8 @@ body.reader-open .desk::after{
 }
 
 .record-panel{
+    position:relative;
+
     display:grid;
     grid-template-columns:220px 1fr;
     gap:28px;
@@ -663,6 +665,24 @@ body.reader-open .desk::after{
     font-weight:500;
 }
 
+.record-audio{
+    width:100%;
+    max-width:340px;
+}
+
+.record-panel__hint{
+    max-width:360px;
+
+    margin-top:12px;
+
+    color:rgba(97,71,53,.62);
+
+    font-size:12px;
+    line-height:1.7;
+    letter-spacing:.6px;
+    text-transform:none;
+}
+
 .record-panel__empty{
     padding:18px 20px;
 
@@ -671,6 +691,75 @@ body.reader-open .desk::after{
 
     color:#7c604f;
     background:rgba(255,255,255,.36);
+}
+
+.record-message{
+    position:absolute;
+
+    right:0;
+    bottom:-18px;
+
+    width:min(420px, 82vw);
+
+    padding:24px 28px 26px;
+
+    border:1px solid rgba(168,126,78,.24);
+    border-radius:4px;
+
+    background:
+        linear-gradient(180deg, rgba(255,252,244,.98), rgba(238,225,205,.98));
+
+    color:#5a4032;
+
+    box-shadow:
+        0 22px 54px rgba(41,24,16,.28),
+        inset 0 1px rgba(255,255,255,.86);
+
+    opacity:0;
+    transform:translateY(14px) scale(.98);
+    pointer-events:none;
+
+    transition:
+        opacity .34s ease,
+        transform .34s cubic-bezier(.2,.72,.18,1);
+}
+
+.record-message.is-visible{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
+}
+
+.record-message p{
+    font-size:16px;
+    line-height:2;
+    letter-spacing:.4px;
+}
+
+.record-message__close{
+    appearance:none;
+
+    position:absolute;
+
+    right:10px;
+    top:9px;
+
+    width:28px;
+    height:28px;
+
+    display:grid;
+    place-items:center;
+
+    border:0;
+    border-radius:50%;
+
+    background:rgba(87,55,39,.10);
+    color:#654331;
+
+    font-size:19px;
+    line-height:1;
+
+    cursor:pointer;
 }
 
 .polaroid-spread[hidden]{
@@ -1019,6 +1108,30 @@ body.reader-open .desk::after{
     .record-panel__disc{
         width:min(220px, 70vw);
         margin:0 auto;
+    }
+
+    .record-audio,
+    .record-panel__hint{
+        margin-inline:auto;
+    }
+
+    .record-message{
+        position:relative;
+
+        right:auto;
+        bottom:auto;
+
+        width:100%;
+
+        margin-top:8px;
+        padding:22px 22px 24px;
+
+        text-align:left;
+    }
+
+    .record-message p{
+        font-size:15px;
+        line-height:1.9;
     }
 
     .polaroid-spread__photos{

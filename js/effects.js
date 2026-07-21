@@ -106,11 +106,14 @@ const snackMoments = [
 
 const recordTracks = [
     {
-        title: "Song not chosen yet",
-        artist: "Our Story",
-        src: ""
+        title: "A Million Dreams",
+        artist: "Piano version",
+        src: "assets/music/a-million-dreams-piano.mp3",
+        note: "請把合法取得的鋼琴版音檔放在 assets/music/a-million-dreams-piano.mp3"
     }
 ];
+
+const recordReflection = "以前，我常用這首歌提醒自己要撐住、要繼續往前走。那時候我以為努力就是一個人咬牙撐過去。後來才發現，原來也可以有人陪我一起面對、一起變好。現在再聽見它，想到的不是孤單奮戰，而是我們一起往夢想靠近的感覺。";
 
 function createObjectModal(){
     const modal = document.createElement("div");
@@ -187,6 +190,10 @@ function openObjectModal(modal, { eyebrow, title, body }){
 }
 
 function closeObjectModal(modal){
+    modal.querySelectorAll("audio").forEach((audio) => {
+        audio.pause();
+    });
+    document.getElementById("recordPlayer")?.classList.remove("is-playing");
     modal.hidden = true;
     document.body.classList.remove("modal-open");
 }
@@ -239,12 +246,48 @@ function renderRecordPlayer(){
                 <p>${track.artist}</p>
                 <h3>${track.title}</h3>
                 ${track.src
-                    ? `<audio class="record-audio" controls src="${track.src}"></audio>`
+                    ? `
+                        <audio class="record-audio" controls src="${track.src}" preload="metadata"></audio>
+                        <p class="record-panel__hint">${track.note}</p>
+                    `
                     : `<div class="record-panel__empty">Music coming soon</div>`
                 }
             </div>
+            <aside class="record-message" aria-live="polite">
+                <button class="record-message__close" type="button" aria-label="關閉音樂小卡">×</button>
+                <p>${recordReflection}</p>
+            </aside>
         </div>
     `;
+}
+
+function bindRecordPanel(modal){
+    const audio = modal.querySelector(".record-audio");
+    const panelDisc = modal.querySelector(".record-panel__disc");
+    const message = modal.querySelector(".record-message");
+    const messageClose = modal.querySelector(".record-message__close");
+
+    messageClose?.addEventListener("click", () => {
+        message?.classList.remove("is-visible");
+    });
+
+    if(!audio) return;
+
+    audio.addEventListener("playing", () => {
+        recordPlayer?.classList.add("is-playing");
+        panelDisc?.classList.add("is-playing");
+        message?.classList.add("is-visible");
+    });
+
+    audio.addEventListener("pause", () => {
+        recordPlayer?.classList.remove("is-playing");
+        panelDisc?.classList.remove("is-playing");
+    });
+
+    audio.addEventListener("ended", () => {
+        recordPlayer?.classList.remove("is-playing");
+        panelDisc?.classList.remove("is-playing");
+    });
 }
 
 const objectModal = createObjectModal();
@@ -285,27 +328,9 @@ if(recordPlayer){
         event.stopPropagation();
         openObjectModal(objectModal, {
             eyebrow: "Vinyl player",
-            title: "Music for this story",
+            title: "A Million Dreams",
             body: renderRecordPlayer()
         });
-
-        const audio = objectModal.querySelector(".record-audio");
-
-        if(audio){
-            audio.addEventListener("play", () => {
-                recordPlayer.classList.add("is-playing");
-                objectModal.querySelector(".record-panel__disc")?.classList.add("is-playing");
-            });
-
-            audio.addEventListener("pause", () => {
-                recordPlayer.classList.remove("is-playing");
-                objectModal.querySelector(".record-panel__disc")?.classList.remove("is-playing");
-            });
-
-            audio.addEventListener("ended", () => {
-                recordPlayer.classList.remove("is-playing");
-                objectModal.querySelector(".record-panel__disc")?.classList.remove("is-playing");
-            });
-        }
+        bindRecordPanel(objectModal);
     });
 }
