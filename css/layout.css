@@ -1159,11 +1159,12 @@ body.reader-open .desk-envelope{
 }
 
 .polaroid-card{
+    --polaroid-card-size:132px;
     --polaroid-photo-size:132px;
 
     position:absolute;
 
-    width:132px;
+    width:var(--polaroid-card-size);
 
     padding:10px 10px 18px;
 
@@ -1442,7 +1443,7 @@ body.reader-open .desk-envelope{
         left:auto;
         right:7%;
         bottom:7%;
-        scale:.66;
+        scale:.72;
     }
 
     .record-player{
@@ -1494,9 +1495,10 @@ body.reader-open .desk-envelope{
     }
 
     .polaroid-card{
-        --polaroid-photo-size:82px;
+        --polaroid-card-size:86px;
+        --polaroid-photo-size:86px;
 
-        width:82px;
+        width:var(--polaroid-card-size);
         padding:7px 7px 12px;
     }
 

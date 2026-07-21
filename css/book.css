@@ -4,6 +4,7 @@
     height:clamp(358px,58vw,482px);
 
     position:relative;
+    top:18px;
 
     perspective:2000px;
 
@@ -389,7 +390,7 @@ body.reader-open .record-player{
 .book.open{
     position:fixed;
     left:50%;
-    top:50%;
+    top:53%;
 
     width:min(500px, calc(100vw - 42px));
     height:auto;
@@ -587,11 +588,13 @@ body.reader-open .record-player{
     }
 
     .book{
+        top:22px;
         width:clamp(205px, 62vw, 260px);
         height:clamp(288px, 86vw, 366px);
     }
 
     .book.open{
+        top:53%;
         width:min(386px, calc(100vw - 28px));
         height:auto;
         aspect-ratio:350 / 482;
