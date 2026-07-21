@@ -273,7 +273,7 @@ function bindRecordPanel(modal){
         if(!playButton) return;
 
         playButton.textContent = recordAudio.paused
-            ? hasRecordStarted ? "Play music" : "Play from 0:09"
+            ? "Play music"
             : "Pause music";
     }
 
