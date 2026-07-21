@@ -670,6 +670,46 @@ body.reader-open .desk::after{
     max-width:340px;
 }
 
+.record-play{
+    appearance:none;
+
+    min-width:150px;
+
+    padding:10px 18px;
+
+    border:1px solid rgba(111,74,46,.20);
+    border-radius:4px;
+
+    background:
+        linear-gradient(180deg, rgba(105,63,42,.92), rgba(62,37,29,.96));
+    color:#fff4db;
+
+    font-family:"Cormorant Garamond", serif;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:1.2px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 22px rgba(44,26,17,.22),
+        inset 0 1px rgba(255,255,255,.16);
+
+    transition:
+        transform .18s ease,
+        filter .18s ease;
+}
+
+.record-play:hover,
+.record-play:focus-visible{
+    transform:translateY(-1px);
+    filter:brightness(1.08);
+}
+
+.record-play.is-hidden{
+    display:none;
+}
+
 .record-panel__hint{
     max-width:360px;
 
@@ -681,6 +721,25 @@ body.reader-open .desk::after{
     line-height:1.7;
     letter-spacing:.6px;
     text-transform:none;
+}
+
+.record-embed-wrap{
+    width:100%;
+    max-width:360px;
+
+    margin-top:18px;
+}
+
+.record-embed{
+    width:100%;
+    aspect-ratio:16 / 9;
+
+    display:block;
+
+    border:0;
+    border-radius:6px;
+
+    box-shadow:0 14px 34px rgba(45,27,18,.22);
 }
 
 .record-panel__empty{
@@ -1111,7 +1170,8 @@ body.reader-open .desk::after{
     }
 
     .record-audio,
-    .record-panel__hint{
+    .record-panel__hint,
+    .record-embed-wrap{
         margin-inline:auto;
     }
 

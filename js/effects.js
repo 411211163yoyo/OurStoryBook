@@ -108,8 +108,9 @@ const recordTracks = [
     {
         title: "A Million Dreams",
         artist: "Piano version",
-        src: "assets/music/a-million-dreams-piano.mp3",
-        note: "請把合法取得的鋼琴版音檔放在 assets/music/a-million-dreams-piano.mp3"
+        videoId: "aXS-2bHw4VU",
+        startAt: 9,
+        note: "YouTube will open from 0:09"
     }
 ];
 
@@ -193,6 +194,9 @@ function closeObjectModal(modal){
     modal.querySelectorAll("audio").forEach((audio) => {
         audio.pause();
     });
+    modal.querySelectorAll(".record-embed").forEach((embed) => {
+        embed.remove();
+    });
     document.getElementById("recordPlayer")?.classList.remove("is-playing");
     modal.hidden = true;
     document.body.classList.remove("modal-open");
@@ -245,13 +249,9 @@ function renderRecordPlayer(){
             <div class="record-panel__info">
                 <p>${track.artist}</p>
                 <h3>${track.title}</h3>
-                ${track.src
-                    ? `
-                        <audio class="record-audio" controls src="${track.src}" preload="metadata"></audio>
-                        <p class="record-panel__hint">${track.note}</p>
-                    `
-                    : `<div class="record-panel__empty">Music coming soon</div>`
-                }
+                <button class="record-play" type="button">Play from 0:09</button>
+                <p class="record-panel__hint">${track.note}</p>
+                <div class="record-embed-wrap"></div>
             </div>
             <aside class="record-message" aria-live="polite">
                 <button class="record-message__close" type="button" aria-label="關閉音樂小卡">×</button>
@@ -266,9 +266,29 @@ function bindRecordPanel(modal){
     const panelDisc = modal.querySelector(".record-panel__disc");
     const message = modal.querySelector(".record-message");
     const messageClose = modal.querySelector(".record-message__close");
+    const playButton = modal.querySelector(".record-play");
+    const embedWrap = modal.querySelector(".record-embed-wrap");
+    const track = recordTracks[0];
 
     messageClose?.addEventListener("click", () => {
         message?.classList.remove("is-visible");
+    });
+
+    playButton?.addEventListener("click", () => {
+        if(!embedWrap || embedWrap.querySelector(".record-embed")) return;
+
+        const embed = document.createElement("iframe");
+        embed.className = "record-embed";
+        embed.title = `${track.title} ${track.artist}`;
+        embed.allow = "autoplay; encrypted-media; picture-in-picture";
+        embed.allowFullscreen = true;
+        embed.src = `https://www.youtube-nocookie.com/embed/${track.videoId}?start=${track.startAt}&autoplay=1&rel=0`;
+
+        embedWrap.appendChild(embed);
+        playButton.classList.add("is-hidden");
+        recordPlayer?.classList.add("is-playing");
+        panelDisc?.classList.add("is-playing");
+        message?.classList.add("is-visible");
     });
 
     if(!audio) return;
