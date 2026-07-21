@@ -665,11 +665,6 @@ body.reader-open .desk::after{
     font-weight:500;
 }
 
-.record-audio{
-    width:100%;
-    max-width:340px;
-}
-
 .record-play{
     appearance:none;
 
@@ -721,25 +716,6 @@ body.reader-open .desk::after{
     line-height:1.7;
     letter-spacing:.6px;
     text-transform:none;
-}
-
-.record-embed-wrap{
-    width:100%;
-    max-width:360px;
-
-    margin-top:18px;
-}
-
-.record-embed{
-    width:100%;
-    aspect-ratio:16 / 9;
-
-    display:block;
-
-    border:0;
-    border-radius:6px;
-
-    box-shadow:0 14px 34px rgba(45,27,18,.22);
 }
 
 .record-panel__empty{
@@ -1169,9 +1145,7 @@ body.reader-open .desk::after{
         margin:0 auto;
     }
 
-    .record-audio,
-    .record-panel__hint,
-    .record-embed-wrap{
+    .record-panel__hint{
         margin-inline:auto;
     }
 

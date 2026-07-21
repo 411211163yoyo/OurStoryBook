@@ -108,13 +108,17 @@ const recordTracks = [
     {
         title: "A Million Dreams",
         artist: "Piano version",
-        videoId: "aXS-2bHw4VU",
-        startAt: 9,
-        note: "YouTube will open from 0:09"
+        src: "assets/music/a-million-dreams-piano.aac",
+        startAt: 0,
+        note: "Music keeps playing while you read"
     }
 ];
 
 const recordReflection = "以前，我常用這首歌提醒自己要撐住、要繼續往前走。那時候我以為努力就是一個人咬牙撐過去。後來才發現，原來也可以有人陪我一起面對、一起變好。現在再聽見它，想到的不是孤單奮戰，而是我們一起往夢想靠近的感覺。";
+const recordAudio = new Audio(recordTracks[0].src);
+let hasRecordStarted = false;
+
+recordAudio.preload = "auto";
 
 function createObjectModal(){
     const modal = document.createElement("div");
@@ -191,13 +195,10 @@ function openObjectModal(modal, { eyebrow, title, body }){
 }
 
 function closeObjectModal(modal){
-    modal.querySelectorAll("audio").forEach((audio) => {
-        audio.pause();
-    });
-    modal.querySelectorAll(".record-embed").forEach((embed) => {
-        embed.remove();
-    });
-    document.getElementById("recordPlayer")?.classList.remove("is-playing");
+    if(recordAudio.paused){
+        document.getElementById("recordPlayer")?.classList.remove("is-playing");
+    }
+
     modal.hidden = true;
     document.body.classList.remove("modal-open");
 }
@@ -249,9 +250,8 @@ function renderRecordPlayer(){
             <div class="record-panel__info">
                 <p>${track.artist}</p>
                 <h3>${track.title}</h3>
-                <button class="record-play" type="button">Play from 0:09</button>
+                <button class="record-play" type="button">${recordAudio.paused ? "Play music" : "Pause music"}</button>
                 <p class="record-panel__hint">${track.note}</p>
-                <div class="record-embed-wrap"></div>
             </div>
             <aside class="record-message" aria-live="polite">
                 <button class="record-message__close" type="button" aria-label="關閉音樂小卡">×</button>
@@ -262,52 +262,75 @@ function renderRecordPlayer(){
 }
 
 function bindRecordPanel(modal){
-    const audio = modal.querySelector(".record-audio");
     const panelDisc = modal.querySelector(".record-panel__disc");
     const message = modal.querySelector(".record-message");
     const messageClose = modal.querySelector(".record-message__close");
     const playButton = modal.querySelector(".record-play");
-    const embedWrap = modal.querySelector(".record-embed-wrap");
+    const hint = modal.querySelector(".record-panel__hint");
     const track = recordTracks[0];
+
+    function syncRecordButton(){
+        if(!playButton) return;
+
+        playButton.textContent = recordAudio.paused
+            ? hasRecordStarted ? "Play music" : "Play from 0:09"
+            : "Pause music";
+    }
 
     messageClose?.addEventListener("click", () => {
         message?.classList.remove("is-visible");
     });
 
-    playButton?.addEventListener("click", () => {
-        if(!embedWrap || embedWrap.querySelector(".record-embed")) return;
-
-        const embed = document.createElement("iframe");
-        embed.className = "record-embed";
-        embed.title = `${track.title} ${track.artist}`;
-        embed.allow = "autoplay; encrypted-media; picture-in-picture";
-        embed.allowFullscreen = true;
-        embed.src = `https://www.youtube-nocookie.com/embed/${track.videoId}?start=${track.startAt}&autoplay=1&rel=0`;
-
-        embedWrap.appendChild(embed);
-        playButton.classList.add("is-hidden");
+    recordAudio.onplaying = () => {
         recordPlayer?.classList.add("is-playing");
         panelDisc?.classList.add("is-playing");
         message?.classList.add("is-visible");
+        syncRecordButton();
+    };
+
+    recordAudio.onpause = () => {
+        recordPlayer?.classList.remove("is-playing");
+        panelDisc?.classList.remove("is-playing");
+        syncRecordButton();
+    };
+
+    recordAudio.onended = () => {
+        hasRecordStarted = false;
+        recordPlayer?.classList.remove("is-playing");
+        panelDisc?.classList.remove("is-playing");
+        syncRecordButton();
+    };
+
+    playButton?.addEventListener("click", async () => {
+        if(recordAudio.paused){
+            if(!hasRecordStarted || recordAudio.ended){
+                recordAudio.currentTime = track.startAt;
+            }
+
+            hasRecordStarted = true;
+
+            try{
+                await recordAudio.play();
+            }catch(error){
+                hasRecordStarted = false;
+                if(hint){
+                    hint.textContent = "如果音樂沒有開始，請再點一次播放。";
+                }
+            }
+        }else{
+            recordAudio.pause();
+        }
+
+        syncRecordButton();
     });
 
-    if(!audio) return;
-
-    audio.addEventListener("playing", () => {
+    if(!recordAudio.paused){
         recordPlayer?.classList.add("is-playing");
         panelDisc?.classList.add("is-playing");
         message?.classList.add("is-visible");
-    });
+    }
 
-    audio.addEventListener("pause", () => {
-        recordPlayer?.classList.remove("is-playing");
-        panelDisc?.classList.remove("is-playing");
-    });
-
-    audio.addEventListener("ended", () => {
-        recordPlayer?.classList.remove("is-playing");
-        panelDisc?.classList.remove("is-playing");
-    });
+    syncRecordButton();
 }
 
 const objectModal = createObjectModal();
