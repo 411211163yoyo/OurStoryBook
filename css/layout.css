@@ -68,6 +68,8 @@ body{
             rgba(242,184,112,.020) 20px 22px,
             transparent 22px 48px
         ),
+        radial-gradient(ellipse at 28% 34%, transparent 0 20px, rgba(255,210,142,.026) 21px 23px, transparent 24px 52px),
+        radial-gradient(ellipse at 76% 58%, transparent 0 28px, rgba(255,210,142,.020) 29px 31px, transparent 32px 70px),
         radial-gradient(
             ellipse at 18% 38%,
             rgba(218,145,72,.050),
@@ -143,25 +145,28 @@ body.reader-open .desk::after{
 .desk-note{
     position:absolute;
 
-    left:7%;
-    top:11%;
+    left:6.5%;
+    top:10.5%;
 
-    width:138px;
-    height:88px;
+    width:148px;
+    height:94px;
 
     padding:18px 17px;
 
     border-radius:2px;
 
     background:
-        linear-gradient(150deg, rgba(255,255,255,.58), transparent 24%),
-        repeating-linear-gradient(0deg, transparent 0 17px, rgba(141,103,68,.13) 17px 18px),
-        linear-gradient(180deg, #f2dfbd, #d1b07f);
+        radial-gradient(ellipse at 84% 86%, rgba(98,63,35,.14), transparent 34%),
+        linear-gradient(150deg, rgba(255,255,255,.50), transparent 25%),
+        repeating-linear-gradient(0deg, transparent 0 17px, rgba(120,86,57,.105) 17px 18px),
+        repeating-linear-gradient(92deg, rgba(114,77,45,.040) 0 1px, transparent 1px 13px),
+        linear-gradient(180deg, #ead5b0, #c6a16d);
 
     box-shadow:
-        0 18px 28px rgba(20,10,6,.24),
-        inset 0 1px rgba(255,255,255,.50),
-        inset 0 0 0 1px rgba(104,68,38,.10);
+        0 20px 31px rgba(20,10,6,.28),
+        0 2px 3px rgba(20,10,6,.10),
+        inset 0 1px rgba(255,255,255,.42),
+        inset 0 0 0 1px rgba(104,68,38,.12);
 
     transform:rotate(-8deg);
 
@@ -174,16 +179,37 @@ body.reader-open .desk::after{
 
     position:absolute;
 
+    left:42px;
+    top:-10px;
+
+    width:58px;
+    height:20px;
+
+    background:
+        linear-gradient(90deg, rgba(243,223,181,.48), rgba(255,248,225,.66), rgba(215,181,132,.42));
+
+    box-shadow:
+        0 3px 7px rgba(52,29,17,.13),
+        inset 0 1px rgba(255,255,255,.40);
+
+    transform:rotate(4deg);
+}
+
+.desk-note::after{
+    content:"";
+
+    position:absolute;
+
     right:0;
     bottom:0;
 
-    width:28px;
-    height:28px;
+    width:30px;
+    height:30px;
 
     background:
-        linear-gradient(135deg, rgba(107,72,44,.18) 0 49%, rgba(255,245,219,.72) 50% 100%);
+        linear-gradient(135deg, rgba(102,67,40,.18) 0 49%, rgba(246,226,190,.78) 50% 100%);
 
-    box-shadow:-3px -3px 9px rgba(75,45,25,.10);
+    box-shadow:-3px -3px 9px rgba(75,45,25,.12);
 }
 
 .desk-note span{
@@ -218,12 +244,13 @@ body.reader-open .desk::after{
     bottom:25%;
 
     width:168px;
-    height:9px;
+    height:10px;
 
-    border-radius:999px 2px 2px 999px;
+    border-radius:999px 3px 3px 999px;
 
     background:
-        linear-gradient(90deg, #2a1610 0 10px, #d9b25f 10px 23px, #6d2a24 23px 34px, #a85c35 34px 88%, #ead7b6 88% 96%, #30201a 96% 100%);
+        linear-gradient(90deg, #271510 0 9px, #c8b27d 9px 22px, #6a2a25 22px 34px, #a45e37 34px 87%, #ead8b7 87% 96%, #2b1d18 96% 100%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.10) 0 1px, transparent 1px 18px);
 
     box-shadow:
         0 10px 18px rgba(18,9,5,.22),
@@ -236,11 +263,45 @@ body.reader-open .desk::after{
     z-index:1;
 }
 
+.desk-pencil::before{
+    content:"";
+
+    position:absolute;
+
+    left:-10px;
+    top:1px;
+
+    width:0;
+    height:0;
+
+    border-top:4px solid transparent;
+    border-bottom:4px solid transparent;
+    border-right:12px solid #d6c09a;
+
+    filter:drop-shadow(0 2px 2px rgba(18,9,5,.18));
+}
+
+.desk-pencil::after{
+    content:"";
+
+    position:absolute;
+
+    left:-12px;
+    top:3px;
+
+    width:5px;
+    height:4px;
+
+    border-radius:50%;
+
+    background:#241714;
+}
+
 .desk-ribbon{
     position:absolute;
 
-    right:24%;
-    bottom:9%;
+    right:23%;
+    bottom:8%;
 
     width:14px;
     height:156px;
@@ -248,8 +309,9 @@ body.reader-open .desk::after{
     border-radius:0 0 8px 8px;
 
     background:
-        linear-gradient(90deg, rgba(255,255,255,.10), transparent 34%),
-        linear-gradient(180deg, #6d0f24, #9b263e 64%, #50101d);
+        repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 4px),
+        linear-gradient(90deg, rgba(255,255,255,.09), transparent 34%),
+        linear-gradient(180deg, #58101f, #802035 64%, #3d0d17);
 
     box-shadow:
         0 12px 22px rgba(20,8,6,.22),
@@ -275,12 +337,62 @@ body.reader-open .desk::after{
 
     border-left:7px solid transparent;
     border-right:7px solid transparent;
-    border-top:13px solid #50101d;
+        border-top:13px solid #3d0d17;
+}
+
+.desk-envelope{
+    position:absolute;
+
+    right:5%;
+    bottom:27%;
+
+    width:170px;
+    height:104px;
+
+    border-radius:2px;
+
+    background:
+        linear-gradient(153deg, transparent 49%, rgba(111,76,47,.12) 50%, transparent 51%),
+        linear-gradient(27deg, transparent 49%, rgba(255,255,255,.30) 50%, transparent 51%),
+        linear-gradient(180deg, #dfc79c, #b9905f);
+
+    box-shadow:
+        0 22px 34px rgba(20,10,6,.22),
+        inset 0 1px rgba(255,255,255,.36),
+        inset 0 0 0 1px rgba(97,62,34,.14);
+
+    transform:rotate(10deg);
+
+    opacity:.72;
+
+    pointer-events:none;
+    z-index:1;
+}
+
+.desk-envelope::before{
+    content:"";
+
+    position:absolute;
+
+    left:16px;
+    top:16px;
+
+    width:36px;
+    height:24px;
+
+    border-radius:2px;
+
+    background:
+        repeating-linear-gradient(135deg, rgba(133,43,48,.42) 0 3px, transparent 3px 6px),
+        linear-gradient(180deg, rgba(255,255,255,.38), rgba(255,255,255,.12));
+
+    box-shadow:inset 0 0 0 1px rgba(90,52,32,.08);
 }
 
 body.reader-open .desk-note,
 body.reader-open .desk-pencil,
-body.reader-open .desk-ribbon{
+body.reader-open .desk-ribbon,
+body.reader-open .desk-envelope{
     opacity:.38;
     filter:blur(.4px);
 }
@@ -1311,6 +1423,13 @@ body.reader-open .desk-ribbon{
         bottom:20%;
         scale:.72;
         opacity:.54;
+    }
+
+    .desk-envelope{
+        right:-9%;
+        bottom:30%;
+        scale:.66;
+        opacity:.44;
     }
 
     .photo-stack{
