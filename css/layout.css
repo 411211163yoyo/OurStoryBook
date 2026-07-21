@@ -1,16 +1,16 @@
 body{
     background:
-        radial-gradient(ellipse at 24% 14%, rgba(255,220,168,.11), transparent 30%),
-        radial-gradient(ellipse at 78% 76%, rgba(20,9,5,.36), transparent 46%),
+        radial-gradient(ellipse at 18% 12%, rgba(236,177,102,.10), transparent 26%),
+        radial-gradient(ellipse at 74% 78%, rgba(13,6,3,.46), transparent 48%),
         repeating-linear-gradient(
-            92deg,
-            rgba(20,9,5,.26) 0 1px,
-            transparent 1px 86px,
-            rgba(255,222,174,.035) 86px 89px,
-            transparent 89px 138px
+            91deg,
+            rgba(19,8,3,.32) 0 1px,
+            transparent 1px 74px,
+            rgba(255,220,160,.035) 74px 77px,
+            transparent 77px 128px
         ),
-        linear-gradient(180deg, rgba(255,236,200,.055), rgba(0,0,0,.25)),
-        #3f261c;
+        linear-gradient(180deg, rgba(255,221,171,.050), rgba(0,0,0,.30)),
+        #2e1b14;
 
     color:#47362f;
 }
@@ -36,41 +36,41 @@ body{
     inset:0;
 
     background:
-        linear-gradient(104deg, rgba(255,255,255,.045), transparent 24%),
+        linear-gradient(104deg, rgba(255,255,255,.038), transparent 23%),
         repeating-linear-gradient(
             90deg,
-            rgba(18,8,4,.34) 0 2px,
-            rgba(105,65,38,.10) 2px 4px,
-            transparent 4px 92px,
-            rgba(255,221,170,.035) 92px 96px,
-            transparent 96px 146px
+            rgba(14,6,3,.42) 0 2px,
+            rgba(117,70,39,.08) 2px 4px,
+            transparent 4px 78px,
+            rgba(236,184,117,.030) 78px 82px,
+            transparent 82px 138px
         ),
         repeating-linear-gradient(
-            3deg,
-            rgba(255,226,187,.020) 0 1px,
-            transparent 1px 11px
+            2deg,
+            rgba(244,196,134,.026) 0 1px,
+            transparent 1px 9px
         ),
         repeating-linear-gradient(
-            178deg,
-            rgba(18,8,5,.060) 0 1px,
-            transparent 1px 16px
+            177deg,
+            rgba(12,5,3,.078) 0 1px,
+            transparent 1px 14px
         ),
         repeating-radial-gradient(
-            ellipse at 44% 52%,
-            transparent 0 18px,
-            rgba(255,215,164,.026) 18px 20px,
-            transparent 20px 42px
+            ellipse at 42% 50%,
+            transparent 0 20px,
+            rgba(242,184,112,.020) 20px 22px,
+            transparent 22px 48px
         ),
         radial-gradient(
             ellipse at 18% 38%,
-            rgba(255,203,144,.055),
+            rgba(218,145,72,.050),
             transparent 34%
         ),
         linear-gradient(
             180deg,
-            #5c3827 0%,
-            #42281e 48%,
-            #271914 100%
+            #4a2b1d 0%,
+            #342017 48%,
+            #1d120e 100%
         );
 
     opacity:.96;
@@ -89,10 +89,11 @@ body{
     background:
         linear-gradient(
             180deg,
-            rgba(255,235,198,.10),
+            rgba(255,225,178,.08),
             transparent 34%,
-            rgba(0,0,0,.24)
-        );
+            rgba(0,0,0,.30)
+        ),
+        radial-gradient(ellipse at 50% 108%, rgba(0,0,0,.34), transparent 42%);
 
     pointer-events:none;
     z-index:0;
@@ -106,7 +107,7 @@ body.reader-open .desk::after{
         linear-gradient(
             180deg,
             rgba(0,0,0,.18),
-            rgba(0,0,0,.44)
+            rgba(0,0,0,.52)
         );
 }
 
@@ -241,7 +242,7 @@ body.reader-open .desk::after{
     width:250px;
     height:172px;
 
-    border-radius:11px;
+    border-radius:10px;
 
     position:absolute;
 
@@ -249,13 +250,13 @@ body.reader-open .desk::after{
     top:10%;
 
     background:
-        linear-gradient(180deg, rgba(255,242,220,.12), transparent 18%),
-        radial-gradient(ellipse at 72% 20%, rgba(255,224,176,.12), transparent 18%),
-        repeating-linear-gradient(92deg, rgba(255,236,203,.040) 0 1px, transparent 1px 15px),
-        linear-gradient(145deg, #76503b 0%, #43271f 58%, #1d100d 100%);
+        linear-gradient(180deg, rgba(255,237,210,.13), transparent 17%),
+        radial-gradient(ellipse at 72% 22%, rgba(255,223,174,.13), transparent 17%),
+        repeating-linear-gradient(92deg, rgba(255,230,194,.038) 0 1px, transparent 1px 13px),
+        linear-gradient(145deg, #6b4735 0%, #3b221a 58%, #170d0b 100%);
 
     box-shadow:
-        0 24px 42px rgba(0,0,0,.46),
+        0 25px 44px rgba(0,0,0,.50),
         inset 0 1px rgba(255,255,255,.12),
         inset 0 -12px 20px rgba(0,0,0,.22),
         inset 8px 0 18px rgba(255,232,190,.04),
@@ -317,8 +318,8 @@ body.reader-open .desk::after{
     border-radius:50%;
 
     background:
-        radial-gradient(circle at 48% 45%, rgba(255,255,255,.12), transparent 0 5%, transparent 34%),
-        radial-gradient(circle at center, #050505 0 57%, #242424 58% 61%, #0c0c0c 62% 70%, #4a4039 71% 75%, #16100e 76% 100%);
+        radial-gradient(circle at 47% 42%, rgba(255,255,255,.13), transparent 0 5%, transparent 34%),
+        radial-gradient(circle at center, #050505 0 57%, #242424 58% 61%, #0b0b0b 62% 70%, #4a4039 71% 75%, #15100e 76% 100%);
 
     box-shadow:
         0 13px 23px rgba(0,0,0,.46),
@@ -337,7 +338,7 @@ body.reader-open .desk::after{
 
     background:
         radial-gradient(circle at center, #e6c978 0 8%, #2d1d19 8.5% 12%, transparent 12.5%),
-        conic-gradient(from 18deg, rgba(255,255,255,.16), transparent 12%, rgba(255,255,255,.07) 22%, transparent 36%),
+        conic-gradient(from 18deg, rgba(255,255,255,.18), transparent 12%, rgba(255,255,255,.06) 22%, transparent 36%),
         repeating-radial-gradient(circle at center, #080808 0 2px, #222 2px 3px, #0f0f0f 3px 5px);
 
     box-shadow:
@@ -518,8 +519,10 @@ body.reader-open .desk::after{
     filter:brightness(1.08);
 
     box-shadow:
-        0 20px 36px rgba(0,0,0,.42),
-        inset 0 0 16px rgba(255,255,255,.08);
+        0 26px 48px rgba(0,0,0,.50),
+        inset 0 1px rgba(255,255,255,.16),
+        inset 0 -12px 20px rgba(0,0,0,.24),
+        inset 0 0 18px rgba(255,255,255,.06);
 }
 
 .object-modal[hidden]{
@@ -545,7 +548,7 @@ body.reader-open .desk::after{
     inset:0;
 
     background:
-        radial-gradient(ellipse at center, rgba(35,20,16,.34), rgba(8,5,4,.78));
+        radial-gradient(ellipse at center, rgba(53,31,23,.32), rgba(7,4,3,.80));
 
     backdrop-filter:blur(5px);
 }
@@ -553,19 +556,19 @@ body.reader-open .desk::after{
 .object-modal__panel{
     position:relative;
 
-    width:min(760px, 92vw);
+    width:min(720px, 92vw);
     max-height:min(720px, 88vh);
 
     overflow:auto;
 
-    padding:32px;
+    padding:34px;
 
-    border:1px solid rgba(241,211,151,.28);
-    border-radius:18px;
+    border:1px solid rgba(241,211,151,.24);
+    border-radius:8px;
 
     background:
-        linear-gradient(135deg, rgba(255,248,235,.96), rgba(226,208,181,.96)),
-        radial-gradient(ellipse at top, rgba(255,255,255,.5), transparent 45%);
+        radial-gradient(ellipse at 24% 0%, rgba(255,255,255,.50), transparent 45%),
+        linear-gradient(135deg, rgba(255,249,238,.98), rgba(229,211,184,.98));
 
     box-shadow:
         0 32px 80px rgba(0,0,0,.42),
@@ -586,9 +589,9 @@ body.reader-open .desk::after{
     height:34px;
 
     border:0;
-    border-radius:50%;
+    border-radius:4px;
 
-    background:rgba(86,53,39,.12);
+    background:rgba(86,53,39,.10);
     color:#4f372c;
 
     font-size:24px;
@@ -623,20 +626,20 @@ body.reader-open .desk::after{
 
     display:grid;
     grid-template-columns:220px 1fr;
-    gap:28px;
+    gap:30px;
     align-items:center;
 }
 
 .record-panel__disc{
-    width:220px;
+    width:210px;
     aspect-ratio:1;
 
     border-radius:50%;
 
     background:
-        radial-gradient(circle at center, #e6c978 0 8%, #2d1d19 8.5% 12%, transparent 12.5%),
-        conic-gradient(from 18deg, rgba(255,255,255,.16), transparent 12%, rgba(255,255,255,.07) 22%, transparent 36%),
-        repeating-radial-gradient(circle at center, #080808 0 3px, #222 3px 4px, #0f0f0f 4px 7px);
+        radial-gradient(circle at center, #e8ca7a 0 8%, #2c1c18 8.5% 12%, transparent 12.5%),
+        conic-gradient(from 18deg, rgba(255,255,255,.17), transparent 12%, rgba(255,255,255,.06) 22%, transparent 36%),
+        repeating-radial-gradient(circle at center, #070707 0 3px, #202020 3px 4px, #0f0f0f 4px 7px);
 
     box-shadow:
         0 20px 36px rgba(0,0,0,.28),
@@ -649,31 +652,31 @@ body.reader-open .desk::after{
 }
 
 .record-panel__info p{
-    color:#9a7257;
+    color:#9a7358;
 
     letter-spacing:2px;
     text-transform:uppercase;
 }
 
 .record-panel__info h3{
-    margin:8px 0 24px;
+    margin:8px 0 22px;
 
     color:#3f2b23;
 
     font-family:"Cormorant Garamond", serif;
-    font-size:34px;
+    font-size:clamp(30px, 5vw, 38px);
     font-weight:500;
 }
 
 .record-play{
     appearance:none;
 
-    min-width:150px;
+    min-width:142px;
 
-    padding:10px 18px;
+    padding:10px 20px;
 
-    border:1px solid rgba(111,74,46,.20);
-    border-radius:4px;
+    border:1px solid rgba(241,211,151,.22);
+    border-radius:999px;
 
     background:
         linear-gradient(180deg, rgba(105,63,42,.92), rgba(62,37,29,.96));
@@ -710,7 +713,7 @@ body.reader-open .desk::after{
 
     margin-top:12px;
 
-    color:rgba(97,71,53,.62);
+    color:rgba(97,71,53,.58);
 
     font-size:12px;
     line-height:1.7;
@@ -731,23 +734,25 @@ body.reader-open .desk::after{
 .record-message{
     position:absolute;
 
-    right:0;
-    bottom:-18px;
+    right:-8px;
+    bottom:-22px;
 
     width:min(420px, 82vw);
 
-    padding:24px 28px 26px;
+    padding:26px 30px 28px;
 
-    border:1px solid rgba(168,126,78,.24);
-    border-radius:4px;
+    border:1px solid rgba(168,126,78,.22);
+    border-radius:3px;
 
     background:
-        linear-gradient(180deg, rgba(255,252,244,.98), rgba(238,225,205,.98));
+        radial-gradient(ellipse at 24% 0%, rgba(255,255,255,.58), transparent 46%),
+        linear-gradient(180deg, rgba(255,252,244,.99), rgba(239,226,207,.99));
 
     color:#5a4032;
 
     box-shadow:
-        0 22px 54px rgba(41,24,16,.28),
+        0 24px 58px rgba(41,24,16,.30),
+        0 1px 0 rgba(255,255,255,.78),
         inset 0 1px rgba(255,255,255,.86);
 
     opacity:0;
@@ -766,8 +771,8 @@ body.reader-open .desk::after{
 }
 
 .record-message p{
-    font-size:16px;
-    line-height:2;
+    font-size:15px;
+    line-height:2.05;
     letter-spacing:.4px;
 }
 
@@ -786,7 +791,7 @@ body.reader-open .desk::after{
     place-items:center;
 
     border:0;
-    border-radius:50%;
+    border-radius:4px;
 
     background:rgba(87,55,39,.10);
     color:#654331;

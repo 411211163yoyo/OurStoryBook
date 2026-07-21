@@ -110,7 +110,7 @@ const recordTracks = [
         artist: "Piano version",
         src: "assets/music/a-million-dreams-piano.aac",
         startAt: 0,
-        note: "Music keeps playing while you read"
+        note: "It will keep playing while you read."
     }
 ];
 
