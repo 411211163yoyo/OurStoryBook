@@ -107,14 +107,14 @@ const snackMoments = [
 const recordTracks = [
     {
         title: "A Million Dreams",
-        artist: "Piano version",
+        artist: "For the days we keep going",
         src: "assets/music/a-million-dreams-piano.aac",
         startAt: 0,
         note: "It keeps playing while you read."
     }
 ];
 
-const recordReflection = "以前，我常用這首歌提醒自己要撐住、要繼續往前走。那時候我以為努力就是一個人咬牙撐過去。後來才發現，原來也可以有人陪我一起面對、一起變好。現在再聽見它，想到的不是孤單奮戰，而是我們一起往夢想靠近的感覺。";
+const recordReflection = "以前聽這首歌的時候，我總是在心裡替自己留一點光，提醒自己還可以再往前一點。那時候我以為努力是把害怕和疲憊都藏好，一個人慢慢撐過去。後來才發現，原來也可以有人陪我一起面對、一起變好。現在再聽見它，想到的不是孤單奮戰，而是我們一起往夢想靠近的感覺。";
 const recordAudio = new Audio(recordTracks[0].src);
 let hasRecordStarted = false;
 
@@ -394,8 +394,8 @@ if(recordPlayer){
     recordPlayer.addEventListener("click", (event) => {
         event.stopPropagation();
         openObjectModal(objectModal, {
-            eyebrow: "Vinyl player",
-            title: "A Million Dreams",
+            eyebrow: "A quiet song for us",
+            title: "The song feels different now",
             body: renderRecordPlayer()
         });
         bindRecordPanel(objectModal);
